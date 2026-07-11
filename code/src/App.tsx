@@ -1,11 +1,90 @@
-import React, { useState } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, Sparkles, Globe, Palette, Smartphone, PenTool, Box, Layers, ArrowUpRight, Mail, Instagram, Twitter, Linkedin, ChevronRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
 import ceebanksImg from '../ceebanks.png';
+import elanImg from '../assets/elan-collective.jpg';
+import bloomImg from '../assets/bloom-illustrations.jpg';
+import techImg from '../assets/tech-startup.jpg';
 
+import { ScrollReveal } from './components/ScrollReveal';
+import { TiltCard } from './components/TiltCard';
+import { StatCounter } from './components/StatCounter';
+import { FAQItem } from './components/FAQItem';
+import { Marquee } from './components/Marquee';
+import { SectionHeading } from './components/SectionHeading';
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* ─── Data ──────────────────────────────────────────────────────────────── */
+const SERVICES = [
+  { icon: Globe, title: 'Web Design', desc: 'Designing modern, responsive websites with clean visuals and UX.' },
+  { icon: Smartphone, title: 'App Design', desc: 'Creating intuitive mobile and web interfaces that are easy to use.' },
+  { icon: Palette, title: 'Branding', desc: 'Building visual identities that clearly and consistently represent brands.' },
+  { icon: PenTool, title: 'Illustration', desc: 'Creating custom visuals that add personality and visual storytelling.' },
+  { icon: Box, title: '3D Motion', desc: 'Designing 3D visuals and motion to add depth and energy.' },
+  { icon: Layers, title: 'Logo Design', desc: 'Crafting unique logos that clearly express your unique brand.' },
+];
+
+const PROCESS_STEPS = [
+  { title: 'Discover', desc: 'Understanding goals, users, and challenges.' },
+  { title: 'Define', desc: 'Structuring flows and defining direction.' },
+  { title: 'Design', desc: 'Creating intuitive and refined solutions.' },
+  { title: 'Refine', desc: 'Iterating through feedback and testing.' },
+  { title: 'Deliver', desc: 'Producing polished, ready-for-use assets.' },
+];
+
+const ADVANTAGES = [
+  { label: 'Faster delivery', pct: 87, color: '#AD1D12' },
+  { label: 'More automated', pct: 82, color: '#AD1D12' },
+  { label: 'Reduced revision cycles', pct: 76, color: '#AD1D12' },
+  { label: 'Consistent on all screen', pct: 70, color: '#AD1D12' },
+  { label: 'Designed for growth', pct: 58, color: '#AD1D12' },
+];
+
+const FAQS = [
+  { q: 'What is your typical project timeline?', a: 'Most branding and web design projects take 4-8 weeks from kickoff to delivery. Timelines vary based on scope, but I always provide a detailed schedule upfront so you know exactly what to expect.' },
+  { q: 'How does your pricing work?', a: 'I offer project-based pricing tailored to your needs. After an initial consultation, I provide a detailed proposal with transparent costs. No hidden fees, no hourly surprises.' },
+  { q: 'What does your design process look like?', a: 'My process follows five stages: Discover, Define, Design, Refine, and Deliver. Each phase includes checkpoints so you stay involved and informed throughout the journey.' },
+  { q: 'How many revisions are included?', a: 'Each project includes 2-3 rounds of revisions at key milestones. My collaborative approach means we align early, so major reworks are rare. Additional rounds can be arranged if needed.' },
+  { q: 'What deliverables will I receive?', a: 'You receive all source files, exported assets, brand guidelines (for branding projects), and developer-ready specs. Everything is organized and clearly labeled for your team.' },
+  { q: 'Do you work with international clients?', a: 'Absolutely. I work with clients globally across different time zones. Communication happens async through structured updates, with live calls scheduled at mutually convenient times.' },
+];
+
+const PROJECTS = [
+  { title: 'Elan Collective', desc: 'Minimal identity for a luxury fashion brand.', img: elanImg, tag: 'Branding' },
+  { title: 'Bloom Illustrations', desc: 'Creative illustrations crafted for modern digital products.', img: bloomImg, tag: 'Illustration' },
+  { title: 'NovaTech Dashboard', desc: 'UI/UX design for a tech analytics platform.', img: techImg, tag: 'UI/UX' },
+];
+
+/* ─── App ───────────────────────────────────────────────────────────────── */
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
   const [showDemoModal, setShowDemoModal] = useState<string | null>(null);
+  const cursorGlowRef = useRef<HTMLDivElement>(null);
+
+  /* Lenis smooth scroll */
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    function raf(time: number) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.lagSmoothing(0);
+    return () => lenis.destroy();
+  }, []);
+
+  /* Mouse-following glow */
+  useEffect(() => {
+    const glow = cursorGlowRef.current;
+    if (!glow) return;
+    const onMove = (e: MouseEvent) => {
+      gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 0.6, ease: 'power2.out' });
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id.toLowerCase());
@@ -22,7 +101,18 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-[#282828] text-[#F7E9E8] transition-colors duration-300 antialiased relative flex flex-col selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden">
+    <div className="min-h-screen bg-[#282828] text-[#F7E9E8] antialiased relative selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden">
+
+      {/* Mouse-follow glow */}
+      <div
+        ref={cursorGlowRef}
+        className="fixed w-[400px] h-[400px] rounded-full pointer-events-none z-[1] hidden md:block"
+        style={{
+          background: 'radial-gradient(circle, rgba(173,29,18,0.06) 0%, transparent 70%)',
+          transform: 'translate(-50%, -50%)',
+          willChange: 'transform',
+        }}
+      />
 
       {/* ── Navbar ───────────────────────────────────────────────────────── */}
       <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
@@ -48,7 +138,7 @@ export default function App() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <button onClick={() => setShowDemoModal('Get In Touch')}
+            <button onClick={() => scrollToSection('Contact')}
               className="px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide transition-all duration-300 active:scale-95 border cursor-pointer border-[#282828] text-[#F7E9E8] bg-[#282828] hover:bg-[#282828]/80 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
               Get In Touch
             </button>
@@ -77,85 +167,416 @@ export default function App() {
       )}
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <div className="relative z-10 w-full h-full flex flex-col">
-        <section id="home" className="relative w-full h-full flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20">
+      <section id="home" className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20">
 
-          {/* Background BRAND DESIGNER watermark */}
-          <div
-            className="absolute left-1/2 pointer-events-none select-none z-0 flex flex-col items-center justify-center w-full"
-            style={{
-              top: '52%',
-              transform: 'translateX(-50%) translateY(-50%)',
-            }}
-          >
-            <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">
-              BRAND
-            </h1>
-            <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">
-              DESIGNER
-            </h1>
+        {/* Background BRAND DESIGNER watermark */}
+        <div
+          className="absolute left-1/2 pointer-events-none select-none z-0 flex flex-col items-center justify-center w-full"
+          style={{ top: '52%', transform: 'translateX(-50%) translateY(-50%)' }}
+        >
+          <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">BRAND</h1>
+          <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">DESIGNER</h1>
+        </div>
+
+        {/* Floating Skill Tags */}
+        <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
+          <div className="relative w-full max-w-5xl h-full hidden md:block">
+            <div className="absolute top-[28%] left-[14%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Web Design</div>
+            <div className="absolute top-[26%] right-[13%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">App Design</div>
+            <div className="absolute top-[40%] left-[8%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Branding</div>
+            <div className="absolute top-[38%] right-[7%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Illustration</div>
+            <div className="absolute top-[54%] left-[12%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">3D Motion</div>
+            <div className="absolute top-[52%] right-[10%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Logo Design</div>
           </div>
+        </div>
 
+        {/* Hero Image */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[72vh] md:h-[77vh] flex justify-center items-end z-20 pointer-events-none">
+          <img src={ceebanksImg} alt="CeeBanks"
+            className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.25] origin-bottom" />
+        </div>
 
-          {/* Floating Skill Tags */}
-          <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
-            <div className="relative w-full max-w-5xl h-full hidden md:block">
-              <div className="absolute top-[28%] left-[14%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
-                Web Design
+        {/* Bottom Content */}
+        <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-0 pointer-events-none px-4">
+          <div className="relative w-full flex justify-center">
+            <div style={{ transform: 'translateX(38.666656px) translateY(34.666626px)' }}
+              className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50">
+              Hello, my name is
+            </div>
+            <div style={{ transform: 'translateX(108.666687px) translateY(52.666626px)' }}
+              className="absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50">
+              Let's work together!
+            </div>
+            <h2
+              className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk"
+              style={{
+                background: 'linear-gradient(to bottom, #282828 30%, #28282855 70%, #28282800 100%)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+              }}>
+              CeeBanks
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          SECTIONS BELOW HERO - Dark background
+         ══════════════════════════════════════════════════════════════════ */}
+
+      {/* ── About / Case Study ──────────────────────────────────────────── */}
+      <section id="about" className="relative py-28 sm:py-36">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+          <ScrollReveal>
+            <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-start">
+              {/* Left: headline + stats */}
+              <div className="single-reveal space-y-8">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12]">Case Study</p>
+                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="activation">
+                  Powering activation from first click.
+                </SectionHeading>
+                <p className="text-[#F7E9E8]/60 text-base leading-relaxed max-w-lg">
+                  CeeBanks' redesign strategy was clarifying, composed with a clear hierarchy,
+                  simpler navigation, and a cleaner dashboard for faster activation and better experience.
+                </p>
+                <div className="flex gap-10 pt-2">
+                  <div>
+                    <div className="font-grotesk font-bold text-3xl sm:text-4xl text-[#F7E9E8]">
+                      <StatCounter target={5.6} suffix="M+" className="" />
+                    </div>
+                    <p className="text-[#F7E9E8]/40 text-xs mt-1">Branded Reach</p>
+                  </div>
+                  <div>
+                    <div className="font-grotesk font-bold text-3xl sm:text-4xl text-[#F7E9E8]">
+                      <StatCounter target={97} suffix="%" className="" />
+                    </div>
+                    <p className="text-[#F7E9E8]/40 text-xs mt-1">Client Satisfaction</p>
+                  </div>
+                </div>
               </div>
-              <div className="absolute top-[26%] right-[13%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
-                App Design
-              </div>
-              <div className="absolute top-[40%] left-[8%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
-                Branding
-              </div>
-              <div className="absolute top-[38%] right-[7%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
-                Illustration
-              </div>
-              <div className="absolute top-[54%] left-[12%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
-                3D Motion
-              </div>
-              <div className="absolute top-[52%] right-[10%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
-                Logo Design
+
+              {/* Right: testimonial card */}
+              <div className="single-reveal">
+                <TiltCard className="rounded-2xl border border-[#F7E9E8]/10 bg-[#F7E9E8]/[0.03] p-8 sm:p-10 backdrop-blur-sm">
+                  <div className="space-y-6">
+                    <span className="text-[#AD1D12] text-5xl font-serif leading-none">&ldquo;</span>
+                    <p className="text-[#F7E9E8]/80 text-base leading-relaxed -mt-4">
+                      The redesign greatly improved usability and engagement. The process was structured,
+                      collaborative, and detail-oriented. Our conversion rates went up 40% in the first month.
+                    </p>
+                    <div className="flex items-center gap-4 pt-2">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#AD1D12] to-[#F7E9E8]/30 flex items-center justify-center text-sm font-bold">
+                        SB
+                      </div>
+                      <div>
+                        <p className="font-semibold text-sm">Sophie Barrett</p>
+                        <p className="text-[#F7E9E8]/40 text-xs">Product Designer at Thompson</p>
+                      </div>
+                    </div>
+                  </div>
+                </TiltCard>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
-          {/* Hero Image */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[72vh] md:h-[77vh] flex justify-center items-end z-20 pointer-events-none">
-            <img src={ceebanksImg} alt="CeeBanks"
-              className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.25] origin-bottom" />
-          </div>
+      {/* ── Divider */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
 
-          {/* Bottom Content */}
-          <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-0 pointer-events-none px-4">
-            <div className="relative w-full flex justify-center">
-
-              <div style={{ transform: 'translateX(38.666656px) translateY(34.666626px)' }}
-                className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50">
-                Hello, my name is
-              </div>
-
-              <div style={{ transform: 'translateX(108.666687px) translateY(52.666626px)' }}
-                className="absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50">
-                Let's work together!
-              </div>
-
-              <h2
-                className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk"
-                style={{
-                  background: 'linear-gradient(to bottom, #282828 30%, #28282855 70%, #28282800 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>
-                CeeBanks
-              </h2>
+      {/* ── Social Proof / Stats ────────────────────────────────────────── */}
+      <section className="relative py-28 sm:py-36 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 text-center">
+          <ScrollReveal>
+            <p className="single-reveal text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12] mb-6">Testimonials</p>
+            <div className="single-reveal">
+              <SectionHeading className="text-4xl sm:text-5xl lg:text-7xl text-center mx-auto max-w-3xl">
+                250+ clients. Countless wins.
+              </SectionHeading>
             </div>
-          </div>
+            <p className="single-reveal text-[#F7E9E8]/50 text-base mt-6 max-w-xl mx-auto leading-relaxed">
+              Empowering founders and teams globally to turn bold ideas into brands people remember and markets reward.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
 
-        </section>
-      </div>
+      {/* ── Divider */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+
+      {/* ── Portfolio / Featured Projects ───────────────────────────────── */}
+      <section id="portfolio" className="relative py-28 sm:py-36">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+          <ScrollReveal>
+            <p className="single-reveal text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12] mb-6">Portfolio</p>
+            <div className="single-reveal mb-6">
+              <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="Featured">
+                Featured projects you'll love.
+              </SectionHeading>
+            </div>
+            <p className="single-reveal text-[#F7E9E8]/50 text-base max-w-xl leading-relaxed mb-16">
+              A selection of projects focused on clarity, usability, and meaningful, lasting positive impact worldwide.
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {PROJECTS.map((p) => (
+                <div key={p.title} className="reveal-card group">
+                  <TiltCard className="rounded-2xl border border-[#F7E9E8]/10 bg-[#F7E9E8]/[0.03] overflow-hidden">
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <img
+                        src={p.img}
+                        alt={p.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-[10px] font-semibold tracking-wide text-white/90">
+                          {p.tag}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-grotesk font-bold text-lg">{p.title}</h3>
+                        <ArrowUpRight className="w-4 h-4 text-[#F7E9E8]/30 group-hover:text-[#AD1D12] transition-colors duration-300" />
+                      </div>
+                      <p className="text-[#F7E9E8]/50 text-sm">{p.desc}</p>
+                    </div>
+                  </TiltCard>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Marquee */}
+          <div className="mt-20">
+            <Marquee />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Divider */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+
+      {/* ── Services ────────────────────────────────────────────────────── */}
+      <section id="services" className="relative py-28 sm:py-36">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+          <ScrollReveal>
+            <div className="grid md:grid-cols-2 gap-10 items-end mb-16">
+              <div className="single-reveal">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12] mb-6">Services</p>
+                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="life.">
+                  How I can help bring ideas to life.
+                </SectionHeading>
+              </div>
+              <p className="single-reveal text-[#F7E9E8]/50 text-base leading-relaxed">
+                Focused solutions to design better products and meaningful user experiences daily.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal stagger={0.1}>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {SERVICES.map((s) => (
+                <div key={s.title} className="reveal-card group">
+                  <TiltCard className="rounded-2xl border border-[#F7E9E8]/8 bg-[#F7E9E8]/[0.03] p-7 hover:border-[#AD1D12]/20 transition-colors duration-500">
+                    <div className="space-y-4">
+                      <div className="w-11 h-11 rounded-xl bg-[#AD1D12]/10 flex items-center justify-center group-hover:bg-[#AD1D12]/20 transition-colors duration-300">
+                        <s.icon className="w-5 h-5 text-[#AD1D12]" />
+                      </div>
+                      <h3 className="font-grotesk font-bold text-lg">{s.title}</h3>
+                      <p className="text-[#F7E9E8]/50 text-sm leading-relaxed">{s.desc}</p>
+                    </div>
+                  </TiltCard>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Divider */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+
+      {/* ── Process ─────────────────────────────────────────────────────── */}
+      <section className="relative py-28 sm:py-36">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+          <ScrollReveal>
+            <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
+              {/* Left */}
+              <div className="single-reveal space-y-8">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12]">How I Work</p>
+                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="done.">
+                  See how I get things done.
+                </SectionHeading>
+                <p className="text-[#F7E9E8]/50 text-base leading-relaxed max-w-md">
+                  A structured approach to delivering clear and effective design solutions every time.
+                </p>
+              </div>
+
+              {/* Right - steps */}
+              <div className="space-y-0">
+                {PROCESS_STEPS.map((step, i) => (
+                  <div key={step.title} className="single-reveal flex gap-5 py-5 border-b border-[#F7E9E8]/8 group cursor-default">
+                    <div className="w-8 h-8 rounded-lg bg-[#AD1D12]/10 flex items-center justify-center shrink-0 group-hover:bg-[#AD1D12] transition-colors duration-300">
+                      <span className="text-[#AD1D12] font-grotesk font-bold text-xs group-hover:text-[#F7E9E8] transition-colors duration-300">
+                        {i + 1}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-grotesk font-bold text-base group-hover:text-[#AD1D12] transition-colors duration-200">{step.title}</h4>
+                      <p className="text-[#F7E9E8]/40 text-sm mt-1">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Quote card */}
+          <ScrollReveal>
+            <div className="single-reveal mt-20 max-w-xl ml-auto">
+              <TiltCard className="rounded-2xl border border-[#F7E9E8]/10 bg-[#F7E9E8]/[0.03] p-8">
+                <p className="text-[#F7E9E8]/70 text-base leading-relaxed italic">
+                  "Great design is rarely accidental. It comes from clarity, structure, and thoughtful iteration."
+                </p>
+                <p className="text-[#F7E9E8]/30 text-sm mt-4">- CeeBanks</p>
+              </TiltCard>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Divider */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+
+      {/* ── What Sets Me Apart ──────────────────────────────────────────── */}
+      <section className="relative py-28 sm:py-36">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+          <ScrollReveal>
+            <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
+              <div className="single-reveal space-y-6">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12]">Advantages</p>
+                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="apart.">
+                  What sets me apart.
+                </SectionHeading>
+                <p className="text-[#F7E9E8]/50 text-base leading-relaxed max-w-md">
+                  A system-driven workflow to reduce delays, improve consistency,
+                  and help teams execute ideas efficiently.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {ADVANTAGES.map((a) => (
+                  <div key={a.label} className="single-reveal flex items-center justify-between py-4 px-5 rounded-xl border border-[#F7E9E8]/8 bg-[#F7E9E8]/[0.02] group hover:border-[#AD1D12]/20 transition-colors duration-300">
+                    <div className="flex items-center gap-3">
+                      <ChevronRight className="w-4 h-4 text-[#AD1D12]" />
+                      <span className="font-medium text-sm sm:text-base">{a.label}</span>
+                    </div>
+                    <span className="px-3 py-1 rounded-full bg-[#AD1D12]/10 text-[#AD1D12] text-xs font-bold">
+                      +{a.pct}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Divider */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+
+      {/* ── FAQ ─────────────────────────────────────────────────────────── */}
+      <section id="faq" className="relative py-28 sm:py-36">
+        <div className="max-w-4xl mx-auto px-6 sm:px-10">
+          <ScrollReveal>
+            <p className="single-reveal text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12] mb-6">FAQ</p>
+            <div className="single-reveal mb-14">
+              <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl">
+                Questions? Answers.
+              </SectionHeading>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal stagger={0.08}>
+            <div>
+              {FAQS.map((faq, i) => (
+                <FAQItem key={i} question={faq.q} answer={faq.a} index={i} />
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Divider */}
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+
+      {/* ── Contact / CTA ───────────────────────────────────────────────── */}
+      <section id="contact" className="relative py-28 sm:py-36">
+        <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center">
+          <ScrollReveal>
+            <p className="single-reveal text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12] mb-6">Get In Touch</p>
+            <div className="single-reveal">
+              <SectionHeading className="text-4xl sm:text-5xl lg:text-7xl text-center mx-auto">
+                Let's create something amazing together.
+              </SectionHeading>
+            </div>
+            <p className="single-reveal text-[#F7E9E8]/50 text-base mt-6 max-w-lg mx-auto leading-relaxed">
+              Ready to elevate your brand? Let's talk about your next project and bring your vision to life.
+            </p>
+            <div className="single-reveal flex flex-col sm:flex-row gap-4 justify-center mt-10">
+              <a href="mailto:hello@ceebanks.com"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#AD1D12] hover:bg-[#AD1D12]/90 text-[#F7E9E8] font-semibold text-sm transition-all duration-300 shadow-lg shadow-[#AD1D12]/20 hover:shadow-[#AD1D12]/30 active:scale-[0.98]">
+                <Mail className="w-4 h-4" />
+                Start a Project
+              </a>
+              <a href="mailto:hello@ceebanks.com"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-[#F7E9E8]/15 text-[#F7E9E8] font-semibold text-sm hover:bg-[#F7E9E8]/5 transition-all duration-300 active:scale-[0.98]">
+                hello@ceebanks.com
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
+          </ScrollReveal>
+
+          {/* Social links */}
+          <ScrollReveal>
+            <div className="single-reveal flex justify-center gap-4 mt-14">
+              {[
+                { icon: Instagram, label: 'Instagram' },
+                { icon: Twitter, label: 'Twitter' },
+                { icon: Linkedin, label: 'LinkedIn' },
+              ].map((s) => (
+                <a key={s.label} href="#" aria-label={s.label}
+                  className="w-11 h-11 rounded-xl border border-[#F7E9E8]/10 flex items-center justify-center text-[#F7E9E8]/40 hover:text-[#AD1D12] hover:border-[#AD1D12]/30 transition-all duration-300">
+                  <s.icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── Footer ──────────────────────────────────────────────────────── */}
+      <footer className="border-t border-[#F7E9E8]/8 py-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#AD1D12] flex items-center justify-center">
+              <span className="font-grotesk font-extrabold text-xs text-[#F7E9E8]">CB</span>
+            </div>
+            <span className="font-grotesk font-bold text-sm tracking-tight">CeeBanks</span>
+          </div>
+          <div className="flex items-center gap-8 text-[#F7E9E8]/30 text-xs">
+            {['Home', 'About', 'Portfolio', 'Services', 'FAQ', 'Contact'].map((item) => (
+              <button key={item} onClick={() => scrollToSection(item)}
+                className="hover:text-[#F7E9E8]/60 transition-colors duration-200 cursor-pointer">
+                {item}
+              </button>
+            ))}
+          </div>
+          <p className="text-[#F7E9E8]/20 text-xs">&copy; 2026 CeeBanks. All rights reserved.</p>
+        </div>
+      </footer>
 
       {/* ── Demo Modal ───────────────────────────────────────────────────── */}
       {showDemoModal && (
