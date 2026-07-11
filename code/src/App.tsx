@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
 import ceebanksImg from '../ceebanks.png';
-import { NoodleProvider, NoodleTrigger, NoodleOverlay } from './NoodleTransition';
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,14 +26,13 @@ export default function App() {
   };
 
   return (
-    <NoodleProvider>
     <div className="min-h-screen bg-[#282828] text-[#F7E9E8] transition-colors duration-300 antialiased relative flex flex-col selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden">
 
       {/* Top Header / Navbar */}
-      <div className="fixed top-3 left-1/2 -translate-x-1/2 z-40 max-w-7xl w-full px-4 sm:px-6">
-        <header className="w-full px-6 py-3 rounded-2xl flex items-center justify-between backdrop-blur-xl border border-black/10 bg-white/10 text-[#282828] transition-all duration-300">
+      <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
+        <header className="w-full px-6 py-3 rounded-2xl flex items-center justify-between backdrop-blur-xl border border-black/10 bg-white/10 text-[#282828] shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-300">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('Home')}>
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#AD1D12] to-[#F7E9E8] p-[1.5px] shadow-[0_0_25px_rgba(173,29,18,0.45)]">
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#AD1D12] to-[#F7E9E8] p-[1.5px] shadow-[0_0_20px_rgba(173,29,18,0.3)]">
               <div className="w-full h-full bg-[#AD1D12] rounded-[10px] flex items-center justify-center">
                 <span className="font-grotesk font-extrabold text-lg tracking-tighter text-[#F7E9E8]">CB</span>
               </div>
@@ -65,7 +63,7 @@ export default function App() {
             >
               Get In Touch
             </button>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-lg hover:bg-black/5 cursor-pointer">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-lg hover:bg-black/5 cursor-pointer text-[#282828]">
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -73,59 +71,61 @@ export default function App() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden relative z-30 px-6 py-4 mx-4 mt-2 rounded-xl backdrop-blur-xl border bg-[#282828]/95 border-[#F7E9E8]/10 shadow-lg shadow-black/30 animate-in fade-in slide-in-from-top duration-200">
-          <div className="flex flex-col gap-4 py-2">
-            {['Home', 'About', 'Portfolio', 'Services', 'FAQ', 'Contact'].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className={`text-left text-base font-medium py-1.5 cursor-pointer ${
-                  activeTab === item ? 'text-[#AD1D12]' : 'text-[#F7E9E8]/65'
-                }`}
-              >
-                {item}
-              </button>
-            ))}
+        <div className="fixed top-20 left-0 w-full z-40 px-4 sm:px-6 md:hidden animate-in fade-in slide-in-from-top duration-200">
+          <div className="w-full px-6 py-4 rounded-xl backdrop-blur-xl border bg-[#282828]/95 border-[#F7E9E8]/10 shadow-xl shadow-black/30">
+            <div className="flex flex-col gap-4 py-2">
+              {['Home', 'About', 'Portfolio', 'Services', 'FAQ', 'Contact'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item)}
+                  className={`text-left text-base font-medium py-1.5 cursor-pointer ${
+                    activeTab === item ? 'text-[#AD1D12]' : 'text-[#F7E9E8]/65'
+                  }`}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
 
-      <NoodleOverlay />
-
-      <div className="relative z-10 w-full flex flex-col gap-24 lg:gap-36">
-
+      <div className="relative z-10 w-full flex flex-col">
         {/* Section 1: Hero Section */}
-        <NoodleTrigger id="home" className="relative z-10 w-full min-h-[100vh] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] pt-32 shadow-2xl">
-           <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 mt-20">
-              <h1 className="hero-bg-text text-[16vw] font-bold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">DESIGNER</h1>
+        <section id="home" className="relative w-full h-[100dvh] min-h-[700px] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20">
+           
+           {/* Background Text */}
+           <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0 w-full flex justify-center">
+              <h1 className="text-[18vw] leading-none font-extrabold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">DESIGNER</h1>
            </div>
            
-           <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center justify-end h-full mt-10 px-4">
-              <div className="absolute inset-0 pointer-events-none hidden md:block z-10">
-                 <div className="tag-anim absolute top-[30%] left-[20%] bg-white/60 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium text-[#282828] shadow-sm border border-black/5">Web Design</div>
-                 <div className="tag-anim absolute top-[50%] left-[15%] bg-white/60 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium text-[#282828] shadow-sm border border-black/5">Branding</div>
-                 <div className="tag-anim absolute top-[70%] left-[22%] bg-white/60 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium text-[#282828] shadow-sm border border-black/5">3D Motion</div>
-                 
-                 <div className="tag-anim absolute top-[30%] right-[20%] bg-white/60 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium text-[#282828] shadow-sm border border-black/5">App Design</div>
-                 <div className="tag-anim absolute top-[50%] right-[15%] bg-white/60 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium text-[#282828] shadow-sm border border-black/5">Illustration</div>
-                 <div className="tag-anim absolute top-[70%] right-[22%] bg-white/60 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium text-[#282828] shadow-sm border border-black/5">Logo Design</div>
-              </div>
-
-              <div className="hero-img-wrap relative z-20 flex justify-center items-end h-[75vh] md:h-[85vh] w-full max-w-5xl mx-auto">
-                 <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_15px_35px_rgba(0,0,0,0.15)] grayscale contrast-125 brightness-95 scale-110 md:scale-125 origin-bottom" />
-              </div>
-
-              <div className="absolute bottom-16 sm:bottom-20 w-full flex flex-col items-center z-30 pointer-events-none">
-                 <div className="flex justify-between w-full max-w-5xl px-4 sm:px-12 mb-[-1.5rem] relative z-40">
-                    <div className="tag-anim bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-[#282828] shadow-md border border-black/5 -rotate-2">Hello, my name is</div>
-                    <div className="tag-anim bg-white/90 backdrop-blur-md px-5 py-2 rounded-full text-xs sm:text-sm font-medium text-[#282828] shadow-md border border-black/5 rotate-2">Let's work together!</div>
-                 </div>
-                 <h2 className="hero-name text-[14vw] sm:text-[15vw] leading-[0.8] font-bold tracking-tighter text-[#282828] text-center w-full drop-shadow-xl font-grotesk mix-blend-normal z-30">
-                    CeeBanks
-                 </h2>
-              </div>
+           {/* Floating Tags (Desktop Only) */}
+           <div className="absolute inset-0 pointer-events-none hidden md:block z-10 max-w-[1400px] mx-auto">
+              <div className="absolute top-[25%] left-[8%] lg:left-[12%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-2">Web Design</div>
+              <div className="absolute top-[45%] left-[5%] lg:left-[8%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 rotate-1">Branding</div>
+              <div className="absolute top-[65%] left-[10%] lg:left-[15%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-3">3D Motion</div>
+              
+              <div className="absolute top-[25%] right-[8%] lg:right-[12%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 rotate-2">App Design</div>
+              <div className="absolute top-[45%] right-[5%] lg:right-[8%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-1">Illustration</div>
+              <div className="absolute top-[65%] right-[10%] lg:right-[15%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 rotate-3">Logo Design</div>
            </div>
-        </NoodleTrigger>
+
+           {/* Hero Image */}
+           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[75vh] md:h-[80vh] flex justify-center items-end z-20 pointer-events-none">
+              <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.2)] grayscale contrast-125 brightness-95" />
+           </div>
+
+           {/* Bottom Content overlay */}
+           <div className="relative z-30 w-full max-w-6xl mx-auto flex flex-col items-center pb-8 sm:pb-12 pointer-events-none px-4">
+              <div className="flex justify-between w-full px-2 sm:px-12 mb-[-1rem] sm:mb-[-1.5rem] relative z-40">
+                 <div className="bg-white/90 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 -rotate-3">Hello, my name is</div>
+                 <div className="bg-white/90 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 rotate-3">Let's work together!</div>
+              </div>
+              <h2 className="text-[16vw] sm:text-[14vw] leading-[0.75] font-extrabold tracking-tighter text-[#282828] text-center w-full drop-shadow-xl font-grotesk mix-blend-normal">
+                 CeeBanks
+              </h2>
+           </div>
+        </section>
       </div>
 
       {showDemoModal && (
@@ -157,6 +157,5 @@ export default function App() {
       )}
 
     </div>
-    </NoodleProvider>
   );
 }
