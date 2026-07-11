@@ -158,18 +158,16 @@ export default function App() {
           <motion.div
             drag={layoutMode}
             dragMomentum={false}
-            initial={{ x: getState('brand-text').x, y: getState('brand-text').y }}
+            animate={{ x: getState('brand-text').x, y: getState('brand-text').y }}
             onDragEnd={(_, info) => {
               const s = getState('brand-text');
               updateState('brand-text', { x: s.x + info.offset.x, y: s.y + info.offset.y });
             }}
             onClick={() => layoutMode && setSelected('brand-text')}
-            className={`absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0 w-full flex flex-col items-center justify-center -space-y-2 sm:-space-y-4 lg:-space-y-6
-              ${layoutMode ? '!pointer-events-auto cursor-grab active:cursor-grabbing' : ''}
-              ${layoutMode && selected === 'brand-text' ? 'outline outline-2 outline-[#AD1D12]' : ''}`}
-            style={{
-              transform: `translateX(${getState('brand-text').x}px) translateY(${getState('brand-text').y}px) scaleY(${getState('brand-text').scaleY ?? 0.7})`,
-            }}
+            className={`absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 select-none w-full flex flex-col items-center justify-center -space-y-2 sm:-space-y-4 lg:-space-y-6
+              ${layoutMode ? 'pointer-events-auto cursor-grab active:cursor-grabbing z-[60]' : 'pointer-events-none z-0'}
+              ${layoutMode && selected === 'brand-text' ? 'outline outline-2 outline-[#AD1D12] outline-offset-4' : ''}`}
+            style={{ scaleY: getState('brand-text').scaleY ?? 0.7 }}
           >
             <h1 style={{ fontSize: `${getState('brand-text').fontSize ?? 28}vw` }}
               className="leading-none font-extrabold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">BRAND</h1>
