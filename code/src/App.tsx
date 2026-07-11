@@ -66,6 +66,11 @@ export default function App() {
   const [showDemoModal, setShowDemoModal] = useState<string | null>(null);
   const cursorGlowRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
+  
+  const imageRef = useRef<HTMLImageElement>(null);
+  const watermarkRef = useRef<HTMLDivElement>(null);
+  const tagsRef = useRef<HTMLDivElement>(null);
+  const bubblesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Hide nav when reaching the footer
@@ -93,12 +98,24 @@ export default function App() {
     return () => lenis.destroy();
   }, []);
 
-  /* Mouse-following glow */
+  /* Mouse-following glow and parallax */
   useEffect(() => {
     const glow = cursorGlowRef.current;
-    if (!glow) return;
     const onMove = (e: MouseEvent) => {
-      gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 0.6, ease: 'power2.out' });
+      const { clientX, clientY } = e;
+      if (glow) {
+        gsap.to(glow, { x: clientX, y: clientY, duration: 0.6, ease: 'power2.out' });
+      }
+
+      // Parallax effect
+      const { innerWidth, innerHeight } = window;
+      const x = (clientX - innerWidth / 2) / innerWidth;
+      const y = (clientY - innerHeight / 2) / innerHeight;
+
+      if (imageRef.current) gsap.to(imageRef.current, { x: x * 30, y: y * 30, duration: 1, ease: 'power2.out' });
+      if (watermarkRef.current) gsap.to(watermarkRef.current, { x: x * -60, y: y * -60, duration: 1, ease: 'power2.out' });
+      if (tagsRef.current) gsap.to(tagsRef.current, { x: x * 70, y: y * 70, duration: 1, ease: 'power2.out' });
+      if (bubblesRef.current) gsap.to(bubblesRef.current, { x: x * 50, y: y * 50, duration: 1, ease: 'power2.out' });
     };
     window.addEventListener('mousemove', onMove);
     return () => window.removeEventListener('mousemove', onMove);
@@ -193,13 +210,15 @@ export default function App() {
           className="absolute left-1/2 pointer-events-none select-none z-0 flex flex-col items-center justify-center w-full"
           style={{ top: '52%', transform: 'translateX(-50%) translateY(-50%)' }}
         >
-          <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">BRAND</h1>
-          <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">DESIGNER</h1>
+          <div ref={watermarkRef} className="flex flex-col items-center justify-center w-full">
+            <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">BRAND</h1>
+            <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">DESIGNER</h1>
+          </div>
         </div>
 
         {/* Floating Skill Tags */}
         <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
-          <div className="relative w-full max-w-5xl h-full hidden md:block">
+          <div ref={tagsRef} className="relative w-full max-w-5xl h-full hidden md:block">
             <div className="absolute top-[28%] left-[14%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Brand Strategy</div>
             <div className="absolute top-[26%] right-[13%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Visual Identity</div>
             <div className="absolute top-[52%] left-[6%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Logo Design</div>
@@ -208,20 +227,22 @@ export default function App() {
         </div>
 
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[72vh] md:h-[77vh] flex justify-center items-end z-20 pointer-events-none">
-          <img src={ceebanksImg} alt="CeeBanks"
+          <img ref={imageRef} src={ceebanksImg} alt="CeeBanks"
             className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)] scale-[1.15] md:scale-[1.25] origin-bottom" />
         </div>
 
         {/* Bottom Content */}
         <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-0 pointer-events-none px-4">
           <div className="relative w-full flex justify-center">
-            <div style={{ transform: 'translateX(38.666656px) translateY(34.666626px)' }}
-              className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50">
-              Hello, my name is
-            </div>
-            <div style={{ transform: 'translateX(108.666687px) translateY(52.666626px)' }}
-              className="absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50">
-              Let's work together!
+            <div ref={bubblesRef} className="absolute w-full h-full z-50 pointer-events-none">
+              <div style={{ transform: 'translateX(38.666656px) translateY(34.666626px)' }}
+                className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 pointer-events-auto">
+                Hello, my name is
+              </div>
+              <div style={{ transform: 'translateX(108.666687px) translateY(52.666626px)' }}
+                className="absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 pointer-events-auto">
+                Let's work together!
+              </div>
             </div>
             <h2
               className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk"
