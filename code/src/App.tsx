@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
+import { motion } from 'motion/react';
 import ceebanksImg from '../ceebanks.png';
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
   const [showDemoModal, setShowDemoModal] = useState<string | null>(null);
+  const [circleSize, setCircleSize] = useState(300);
+
+  const getCoordinates = () => {
+    const tags = ['web-design', 'branding', '3d-motion', 'app-design', 'illustration', 'logo-design'];
+    const coords = tags.map(id => {
+      const el = document.getElementById('tag-' + id);
+      return { 
+        id, 
+        transform: el?.style.transform || 'none'
+      };
+    });
+    const result = JSON.stringify(coords, null, 2);
+    alert('Coordinates:\n\n' + result);
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id.toLowerCase());
@@ -103,24 +118,29 @@ export default function App() {
            {/* Floating Tags */}
            <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
                <div className="relative w-full max-w-5xl h-full hidden md:block">
-                  <div className="absolute top-[25%] left-[20%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-6">
+                  <motion.div id="tag-web-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[25%] left-[20%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-6 cursor-grab active:cursor-grabbing">
                      Web Design
-                  </div>
-                  <div className="absolute top-[22%] right-[22%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-6">
+                  </motion.div>
+                  <motion.div id="tag-branding" drag dragMomentum={false} className="pointer-events-auto absolute top-[22%] right-[22%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-6 cursor-grab active:cursor-grabbing">
                      Branding
-                  </div>
-                  <div className="absolute top-[40%] left-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-3">
+                  </motion.div>
+                  <motion.div id="tag-3d-motion" drag dragMomentum={false} className="pointer-events-auto absolute top-[40%] left-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-3 cursor-grab active:cursor-grabbing">
                      3D Motion
-                  </div>
-                  <div className="absolute top-[38%] right-[15%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-12">
+                  </motion.div>
+                  <motion.div id="tag-app-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[38%] right-[15%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-12 cursor-grab active:cursor-grabbing">
                      App Design
-                  </div>
-                  <div className="absolute top-[55%] left-[18%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-3">
+                  </motion.div>
+                  <motion.div id="tag-illustration" drag dragMomentum={false} className="pointer-events-auto absolute top-[55%] left-[18%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-3 cursor-grab active:cursor-grabbing">
                      Illustration
-                  </div>
-                  <div className="absolute top-[52%] right-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-6">
+                  </motion.div>
+                  <motion.div id="tag-logo-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[52%] right-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-6 cursor-grab active:cursor-grabbing">
                      Logo Design
-                  </div>
+                  </motion.div>
+                  
+                  {/* Draggable Guide Circle */}
+                  <motion.div drag dragMomentum={false} className="pointer-events-auto absolute top-[30%] left-1/2 -translate-x-1/2 border-2 border-red-500 rounded-full cursor-move z-40 bg-red-500/10 flex items-center justify-center" style={{ width: circleSize, height: circleSize }}>
+                     <span className="text-red-500 font-bold opacity-50">Guide</span>
+                  </motion.div>
                </div>
            </div>
 
@@ -171,6 +191,27 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* Layout Tools */}
+      <div className="fixed bottom-4 right-4 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-2xl z-[100] flex flex-col gap-4 border border-black/10 w-64">
+         <h3 className="font-bold text-sm text-black">Layout Mode</h3>
+         <div className="flex flex-col gap-2">
+            <label className="text-xs text-gray-600 font-medium flex justify-between">
+               Circle Size <span>{circleSize}px</span>
+            </label>
+            <input 
+               type="range" 
+               min="100" 
+               max="800" 
+               value={circleSize} 
+               onChange={(e) => setCircleSize(Number(e.target.value))}
+               className="w-full"
+            />
+         </div>
+         <button onClick={getCoordinates} className="bg-blue-600 text-white font-bold py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors w-full shadow-lg cursor-pointer">
+            Get Coordinates
+         </button>
+      </div>
 
     </div>
   );
