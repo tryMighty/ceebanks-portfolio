@@ -19,7 +19,14 @@ export default function App() {
       };
     });
     const result = JSON.stringify(coords, null, 2);
-    alert('Coordinates:\n\n' + result);
+    
+    navigator.clipboard.writeText(result)
+      .then(() => {
+        alert('Coordinates copied to clipboard! Paste them to the firstmate in the chat.');
+      })
+      .catch((err) => {
+        alert('Failed to copy to clipboard. Here is the JSON:\n\n' + result);
+      });
   };
 
   const scrollToSection = (id: string) => {
