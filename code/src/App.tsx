@@ -96,34 +96,36 @@ export default function App() {
            
            {/* Background Text */}
            <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0 w-full flex justify-center">
-              <h1 className="text-[18vw] leading-none font-extrabold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">DESIGNER</h1>
+              <h1 className="text-[26vw] sm:text-[22vw] leading-none font-extrabold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">DESIGNER</h1>
            </div>
            
            {/* Floating Tags (Desktop Only) */}
-           <div className="absolute inset-0 pointer-events-none hidden md:block z-10 max-w-[1400px] mx-auto">
-              <div className="absolute top-[25%] left-[8%] lg:left-[12%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-2">Web Design</div>
-              <div className="absolute top-[45%] left-[5%] lg:left-[8%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 rotate-1">Branding</div>
-              <div className="absolute top-[65%] left-[10%] lg:left-[15%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-3">3D Motion</div>
+           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-full pointer-events-none hidden md:block z-30">
+              <div className="absolute top-[28%] left-[18%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-2">Web Design</div>
+              <div className="absolute top-[42%] left-[8%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-1">Branding</div>
+              <div className="absolute top-[58%] left-[20%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-3">3D Motion</div>
               
-              <div className="absolute top-[25%] right-[8%] lg:right-[12%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 rotate-2">App Design</div>
-              <div className="absolute top-[45%] right-[5%] lg:right-[8%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-1">Illustration</div>
-              <div className="absolute top-[65%] right-[10%] lg:right-[15%] bg-white/70 backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-semibold text-[#282828] shadow-sm border border-black/5 rotate-3">Logo Design</div>
+              <div className="absolute top-[28%] right-[18%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-2">App Design</div>
+              <div className="absolute top-[42%] right-[8%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-1">Illustration</div>
+              <div className="absolute top-[58%] right-[20%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-3">Logo Design</div>
            </div>
 
            {/* Hero Image */}
-           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[75vh] md:h-[80vh] flex justify-center items-end z-20 pointer-events-none">
-              <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.2)] grayscale contrast-125 brightness-95" />
+           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[85vh] md:h-[95vh] flex justify-center items-end z-20 pointer-events-none translate-y-[5%] md:translate-y-[8%]">
+              <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.3] origin-bottom" />
            </div>
 
            {/* Bottom Content overlay */}
-           <div className="relative z-30 w-full max-w-6xl mx-auto flex flex-col items-center pb-8 sm:pb-12 pointer-events-none px-4">
-              <div className="flex justify-between w-full px-2 sm:px-12 mb-[-1rem] sm:mb-[-1.5rem] relative z-40">
-                 <div className="bg-white/90 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 -rotate-3">Hello, my name is</div>
-                 <div className="bg-white/90 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 rotate-3">Let's work together!</div>
+           <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-6 sm:pb-8 pointer-events-none px-4">
+              <div className="relative w-full flex justify-center">
+                 <div className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 -rotate-3 z-50">Hello, my name is</div>
+                 
+                 <div className="absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 rotate-3 z-50">Let's work together!</div>
+                 
+                 <h2 className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-[#282828] text-center w-full font-grotesk mix-blend-normal">
+                    CeeBanks
+                 </h2>
               </div>
-              <h2 className="text-[16vw] sm:text-[14vw] leading-[0.75] font-extrabold tracking-tighter text-[#282828] text-center w-full drop-shadow-xl font-grotesk mix-blend-normal">
-                 CeeBanks
-              </h2>
            </div>
         </section>
       </div>
