@@ -118,22 +118,22 @@ export default function App() {
            {/* Floating Tags */}
            <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
                <div className="relative w-full max-w-5xl h-full hidden md:block">
-                  <motion.div id="tag-web-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[25%] left-[20%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-6 cursor-grab active:cursor-grabbing">
+                  <motion.div id="tag-web-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[25%] left-[20%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 cursor-grab active:cursor-grabbing">
                      Web Design
                   </motion.div>
-                  <motion.div id="tag-branding" drag dragMomentum={false} className="pointer-events-auto absolute top-[22%] right-[22%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-6 cursor-grab active:cursor-grabbing">
+                  <motion.div id="tag-branding" drag dragMomentum={false} className="pointer-events-auto absolute top-[22%] right-[22%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 cursor-grab active:cursor-grabbing">
                      Branding
                   </motion.div>
-                  <motion.div id="tag-3d-motion" drag dragMomentum={false} className="pointer-events-auto absolute top-[40%] left-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-3 cursor-grab active:cursor-grabbing">
+                  <motion.div id="tag-3d-motion" drag dragMomentum={false} className="pointer-events-auto absolute top-[40%] left-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 cursor-grab active:cursor-grabbing">
                      3D Motion
                   </motion.div>
-                  <motion.div id="tag-app-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[38%] right-[15%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-12 cursor-grab active:cursor-grabbing">
+                  <motion.div id="tag-app-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[38%] right-[15%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 cursor-grab active:cursor-grabbing">
                      App Design
                   </motion.div>
-                  <motion.div id="tag-illustration" drag dragMomentum={false} className="pointer-events-auto absolute top-[55%] left-[18%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 rotate-3 cursor-grab active:cursor-grabbing">
+                  <motion.div id="tag-illustration" drag dragMomentum={false} className="pointer-events-auto absolute top-[55%] left-[18%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 cursor-grab active:cursor-grabbing">
                      Illustration
                   </motion.div>
-                  <motion.div id="tag-logo-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[52%] right-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 -rotate-6 cursor-grab active:cursor-grabbing">
+                  <motion.div id="tag-logo-design" drag dragMomentum={false} className="pointer-events-auto absolute top-[52%] right-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 cursor-grab active:cursor-grabbing">
                      Logo Design
                   </motion.div>
                   
