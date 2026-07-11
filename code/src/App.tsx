@@ -95,7 +95,7 @@ export default function App() {
         <section id="home" className="relative w-full h-full flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20">
            
            {/* Background Text */}
-           <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0 w-full flex flex-col items-center justify-center -space-y-2 sm:-space-y-4 lg:-space-y-6">
+           <div className="absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0 w-full flex flex-col items-center justify-center scale-y-[0.7] -space-y-2 sm:-space-y-4 lg:-space-y-6">
               <h1 className="text-[28vw] sm:text-[26vw] lg:text-[22vw] leading-none font-extrabold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">BRAND</h1>
               <h1 className="text-[28vw] sm:text-[26vw] lg:text-[22vw] leading-none font-extrabold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">DESIGNER</h1>
            </div>
