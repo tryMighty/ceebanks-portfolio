@@ -1,31 +1,11 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'motion/react';
+import React, { useState } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
 import ceebanksImg from '../ceebanks.png';
-
-const skillTags = [
-  { id: 'web-design', label: 'Web Design', top: '25%', left: '20%', initX: 24, initY: 96 },
-  { id: 'branding', label: 'Branding', top: '22%', right: '22%', initX: -82.6667, initY: -43.3333 },
-  { id: '3d-motion', label: '3D Motion', top: '40%', left: '12%', initX: 190, initY: -158.667 },
-  { id: 'app-design', label: 'App Design', top: '38%', right: '15%', initX: -64, initY: 8.66669 },
-  { id: 'illustration', label: 'Illustration', top: '55%', left: '18%', initX: 162.667, initY: 56 },
-  { id: 'logo-design', label: 'Logo Design', top: '52%', right: '12%', initX: -201.333, initY: 77.3334 },
-];
-
-const greetingTags = [
-  { id: 'hello', label: 'Hello, my name is', top: '-top-5 sm:-top-8', side: 'left-[8%] sm:left-[15%] lg:left-[22%]', initX: 0, initY: 0 },
-  { id: 'lets-work', label: "Let's work together!", top: '-top-8 sm:-top-12', side: 'right-[8%] sm:right-[15%] lg:right-[22%]', initX: 0, initY: 0 },
-];
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
   const [showDemoModal, setShowDemoModal] = useState<string | null>(null);
-  const [layoutMode, setLayoutMode] = useState(false);
-  const [circleSize, setCircleSize] = useState(150);
-
-  const skillRefs = useRef<Record<string, { x: number; y: number }>>({});
-  const greetingRefs = useRef<Record<string, { x: number; y: number }>>({});
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id.toLowerCase());
@@ -39,22 +19,6 @@ export default function App() {
     }
     setActiveTab(id);
     setMobileMenuOpen(false);
-  };
-
-  const getCoordinates = () => {
-    const allCoords = [
-      ...skillTags.map(t => ({
-        id: t.id,
-        transform: `translateX(${skillRefs.current[t.id]?.x ?? t.initX}px) translateY(${skillRefs.current[t.id]?.y ?? t.initY}px)`
-      })),
-      ...greetingTags.map(t => ({
-        id: t.id,
-        transform: `translateX(${greetingRefs.current[t.id]?.x ?? t.initX}px) translateY(${greetingRefs.current[t.id]?.y ?? t.initY}px)`
-      })),
-    ];
-    const json = JSON.stringify(allCoords, null, 2);
-    navigator.clipboard.writeText(json);
-    alert('All coordinates copied to clipboard! Paste them to the firstmate in the chat.');
   };
 
   return (
@@ -130,46 +94,27 @@ export default function App() {
             <h1 className="text-[28vw] sm:text-[26vw] lg:text-[22vw] leading-none font-extrabold tracking-tighter text-[#282828]/5 whitespace-nowrap font-grotesk">DESIGNER</h1>
           </div>
 
-          {/* Layout Mode Guide Circle */}
-          {layoutMode && (
-            <motion.div
-              drag
-              dragMomentum={false}
-              className="absolute z-50 rounded-full border-2 border-red-500 border-dashed pointer-events-auto cursor-move"
-              style={{
-                width: circleSize,
-                height: circleSize,
-                top: '30%',
-                left: '50%',
-                translateX: '-50%',
-                translateY: '-50%',
-                background: 'rgba(255,0,0,0.05)',
-              }}
-            />
-          )}
-
           {/* Floating Skill Tags */}
-          <div className="absolute inset-0 z-30 flex justify-center" style={{ pointerEvents: layoutMode ? 'auto' : 'none' }}>
+          <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
             <div className="relative w-full max-w-5xl h-full hidden md:block">
-              {skillTags.map((tag) => (
-                <motion.div
-                  key={tag.id}
-                  id={tag.id}
-                  drag={layoutMode}
-                  dragMomentum={false}
-                  initial={{ x: tag.initX, y: tag.initY }}
-                  onDragEnd={(_, info) => {
-                    skillRefs.current[tag.id] = {
-                      x: (skillRefs.current[tag.id]?.x ?? tag.initX) + info.offset.x,
-                      y: (skillRefs.current[tag.id]?.y ?? tag.initY) + info.offset.y,
-                    };
-                  }}
-                  className={`absolute bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60 ${layoutMode ? 'cursor-grab active:cursor-grabbing' : ''}`}
-                  style={{ top: tag.top, left: (tag as any).left, right: (tag as any).right }}
-                >
-                  {tag.label}
-                </motion.div>
-              ))}
+              <div style={{ transform: 'translateX(24px) translateY(96px)' }} className="absolute top-[25%] left-[20%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+                Web Design
+              </div>
+              <div style={{ transform: 'translateX(-82.6667px) translateY(-43.3333px)' }} className="absolute top-[22%] right-[22%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+                Branding
+              </div>
+              <div style={{ transform: 'translateX(190px) translateY(-158.667px)' }} className="absolute top-[40%] left-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+                3D Motion
+              </div>
+              <div style={{ transform: 'translateX(-64px) translateY(8.66669px)' }} className="absolute top-[38%] right-[15%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+                App Design
+              </div>
+              <div style={{ transform: 'translateX(162.667px) translateY(56px)' }} className="absolute top-[55%] left-[18%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+                Illustration
+              </div>
+              <div style={{ transform: 'translateX(-201.333px) translateY(77.3334px)' }} className="absolute top-[52%] right-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+                Logo Design
+              </div>
             </div>
           </div>
 
@@ -179,79 +124,29 @@ export default function App() {
           </div>
 
           {/* Bottom Content overlay */}
-          <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-0 px-4" style={{ pointerEvents: layoutMode ? 'auto' : 'none' }}>
+          <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-0 pointer-events-none px-4">
             <div className="relative w-full flex justify-center">
 
               {/* Greeting - Hello */}
-              <motion.div
-                id="hello"
-                drag={layoutMode}
-                dragMomentum={false}
-                initial={{ x: greetingTags[0].initX, y: greetingTags[0].initY }}
-                onDragEnd={(_, info) => {
-                  greetingRefs.current['hello'] = {
-                    x: (greetingRefs.current['hello']?.x ?? 0) + info.offset.x,
-                    y: (greetingRefs.current['hello']?.y ?? 0) + info.offset.y,
-                  };
-                }}
-                className={`absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50 ${layoutMode ? 'cursor-grab active:cursor-grabbing' : ''}`}
+              <div
+                style={{ transform: 'translateX(38.666656494140625px) translateY(34.6666259765625px)' }}
+                className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50"
               >
                 Hello, my name is
-              </motion.div>
+              </div>
 
               {/* Greeting - Let's work */}
-              <motion.div
-                id="lets-work"
-                drag={layoutMode}
-                dragMomentum={false}
-                initial={{ x: greetingTags[1].initX, y: greetingTags[1].initY }}
-                onDragEnd={(_, info) => {
-                  greetingRefs.current['lets-work'] = {
-                    x: (greetingRefs.current['lets-work']?.x ?? 0) + info.offset.x,
-                    y: (greetingRefs.current['lets-work']?.y ?? 0) + info.offset.y,
-                  };
-                }}
-                className={`absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50 ${layoutMode ? 'cursor-grab active:cursor-grabbing' : ''}`}
+              <div
+                style={{ transform: 'translateX(108.66668701171875px) translateY(52.6666259765625px)' }}
+                className="absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 z-50"
               >
                 Let's work together!
-              </motion.div>
+              </div>
 
               <h2 className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-[#282828] text-center w-full font-grotesk mix-blend-normal">
                 CeeBanks
               </h2>
             </div>
-          </div>
-
-          {/* Layout Mode Panel */}
-          <div className="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 items-end">
-            <button
-              onClick={() => setLayoutMode(l => !l)}
-              className={`px-5 py-2.5 rounded-xl text-sm font-bold shadow-xl border cursor-pointer transition-all ${layoutMode ? 'bg-[#AD1D12] text-white border-[#AD1D12]' : 'bg-white text-[#282828] border-black/10'}`}
-            >
-              {layoutMode ? 'Layout Mode ON' : 'Layout Mode OFF'}
-            </button>
-            {layoutMode && (
-              <>
-                <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-xl shadow-xl border border-black/10">
-                  <span className="text-xs font-bold text-[#282828]">Circle Size</span>
-                  <input
-                    type="range"
-                    min={50}
-                    max={400}
-                    value={circleSize}
-                    onChange={e => setCircleSize(Number(e.target.value))}
-                    className="w-28 cursor-pointer accent-[#AD1D12]"
-                  />
-                  <span className="text-xs font-mono text-[#282828]/60">{circleSize}px</span>
-                </div>
-                <button
-                  onClick={getCoordinates}
-                  className="px-5 py-2.5 rounded-xl text-sm font-bold bg-[#282828] text-white shadow-xl border border-white/10 cursor-pointer hover:bg-[#282828]/80 transition-all"
-                >
-                  Get Coordinates
-                </button>
-              </>
-            )}
           </div>
 
         </section>
