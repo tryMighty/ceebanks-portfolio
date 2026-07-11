@@ -100,19 +100,19 @@ export default function App() {
            </div>
            
            {/* Floating Tags (Desktop Only) */}
-           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-full pointer-events-none hidden md:block z-30">
-              <div className="absolute top-[28%] left-[18%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-2">Web Design</div>
-              <div className="absolute top-[42%] left-[8%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-1">Branding</div>
-              <div className="absolute top-[58%] left-[20%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-3">3D Motion</div>
+           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-full pointer-events-none hidden md:block z-30">
+              <div className="absolute top-[32%] left-[15%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-2">Web Design</div>
+              <div className="absolute top-[48%] left-[2%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-1">Branding</div>
+              <div className="absolute top-[64%] left-[12%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-3">3D Motion</div>
               
-              <div className="absolute top-[28%] right-[18%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-2">App Design</div>
-              <div className="absolute top-[42%] right-[8%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-1">Illustration</div>
-              <div className="absolute top-[58%] right-[20%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-3">Logo Design</div>
+              <div className="absolute top-[32%] right-[15%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-2">App Design</div>
+              <div className="absolute top-[48%] right-[2%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 -rotate-1">Illustration</div>
+              <div className="absolute top-[64%] right-[12%] bg-white/80 backdrop-blur-md px-4 py-2 rounded-full text-[13px] font-semibold text-[#282828] shadow-sm border border-black/5 rotate-3">Logo Design</div>
            </div>
 
            {/* Hero Image */}
-           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[85vh] md:h-[95vh] flex justify-center items-end z-20 pointer-events-none translate-y-[5%] md:translate-y-[8%]">
-              <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.3] origin-bottom" />
+           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[75vh] md:h-[85vh] flex justify-center items-end z-20 pointer-events-none translate-y-[5%] md:translate-y-[8%]">
+              <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.25] origin-bottom" />
            </div>
 
            {/* Bottom Content overlay */}
