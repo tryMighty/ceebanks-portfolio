@@ -17,7 +17,7 @@ export function ScrollReveal({
   children,
   stagger = 0.15,
   y = 40,
-  scale = 1,
+  scale = 0.95,
   duration = 1,
   className = ''
 }: ScrollRevealProps) {
@@ -50,7 +50,7 @@ export function ScrollReveal({
             scale: 1,
             duration: duration,
             stagger: stagger,
-            ease: 'power3.out',
+            ease: 'expo.out',
             overwrite: 'auto',
           });
         },
@@ -61,7 +61,7 @@ export function ScrollReveal({
             scale: scale,
             duration: duration * 0.5,
             stagger: stagger * 0.5,
-            ease: 'power3.in',
+            ease: 'expo.in',
             overwrite: 'auto',
           });
         }

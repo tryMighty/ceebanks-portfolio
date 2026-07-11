@@ -21,7 +21,7 @@ export function SectionHeading({ children, className = '', italicWord }: Section
     if (chars.length === 0) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(chars, { opacity: 0, rotateX: -90, y: 40 });
+      gsap.set(chars, { opacity: 0, rotateX: -80, y: 50, z: -50, scale: 0.95 });
 
       ScrollTrigger.create({
         trigger: el,
@@ -31,9 +31,11 @@ export function SectionHeading({ children, className = '', italicWord }: Section
             opacity: 1,
             rotateX: 0,
             y: 0,
-            duration: 0.8,
-            stagger: 0.02,
-            ease: 'back.out(1.7)',
+            z: 0,
+            scale: 1,
+            duration: 0.9,
+            stagger: 0.03,
+            ease: 'expo.out',
           });
         },
       });

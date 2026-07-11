@@ -118,8 +118,8 @@ export default function App() {
       <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
         <header className="w-full px-6 py-3 rounded-2xl flex items-center justify-between backdrop-blur-xl border border-black/10 bg-white/10 text-[#282828] shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-300">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('Home')}>
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#AD1D12] to-[#F7E9E8] p-[1.5px] shadow-[0_0_20px_rgba(173,29,18,0.3)]">
-              <div className="w-full h-full bg-[#AD1D12] rounded-[10px] flex items-center justify-center">
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-[#282828] p-[1.5px] shadow-[0_4px_20px_rgba(40,40,40,0.15)] transition-transform duration-200 active:scale-[0.97]">
+              <div className="w-full h-full bg-[#282828] rounded-[10px] flex items-center justify-center">
                 <span className="font-grotesk font-extrabold text-lg tracking-tighter text-[#F7E9E8]">CB</span>
               </div>
             </div>
@@ -181,19 +181,16 @@ export default function App() {
         {/* Floating Skill Tags */}
         <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
           <div className="relative w-full max-w-5xl h-full hidden md:block">
-            <div className="absolute top-[28%] left-[14%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Web Design</div>
-            <div className="absolute top-[26%] right-[13%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">App Design</div>
-            <div className="absolute top-[40%] left-[8%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Branding</div>
-            <div className="absolute top-[38%] right-[7%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Illustration</div>
-            <div className="absolute top-[54%] left-[12%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">3D Motion</div>
-            <div className="absolute top-[52%] right-[10%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Logo Design</div>
+            <div className="absolute top-[28%] left-[14%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Brand Strategy</div>
+            <div className="absolute top-[26%] right-[13%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Visual Identity</div>
+            <div className="absolute top-[52%] left-[6%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Logo Design</div>
+            <div className="absolute top-[50%] right-[7%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Typography</div>
           </div>
         </div>
 
-        {/* Hero Image */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[72vh] md:h-[77vh] flex justify-center items-end z-20 pointer-events-none">
           <img src={ceebanksImg} alt="CeeBanks"
-            className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.25] origin-bottom" />
+            className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)] scale-[1.15] md:scale-[1.25] origin-bottom" />
         </div>
 
         {/* Bottom Content */}
@@ -284,16 +281,16 @@ export default function App() {
       <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
 
       {/* ── Social Proof / Stats ────────────────────────────────────────── */}
-      <section className="relative py-28 sm:py-36 overflow-hidden">
+      <section className="relative py-28 sm:py-36 overflow-hidden bg-[#F7E9E8] text-[#282828]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 text-center">
           <ScrollReveal>
             <p className="single-reveal text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12] mb-6">Testimonials</p>
             <div className="single-reveal">
-              <SectionHeading className="text-4xl sm:text-5xl lg:text-7xl text-center mx-auto max-w-3xl">
+              <SectionHeading className="text-4xl sm:text-5xl lg:text-7xl text-center mx-auto max-w-3xl text-[#282828]">
                 250+ clients. Countless wins.
               </SectionHeading>
             </div>
-            <p className="single-reveal text-[#F7E9E8]/50 text-base mt-6 max-w-xl mx-auto leading-relaxed">
+            <p className="single-reveal text-[#282828]/60 text-base mt-6 max-w-xl mx-auto leading-relaxed">
               Empowering founders and teams globally to turn bold ideas into brands people remember and markets reward.
             </p>
           </ScrollReveal>
@@ -301,19 +298,19 @@ export default function App() {
       </section>
 
       {/* ── Divider */}
-      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#282828]/10 to-transparent" />
 
       {/* ── Portfolio / Featured Projects ───────────────────────────────── */}
-      <section id="portfolio" className="relative py-28 sm:py-36">
+      <section id="portfolio" className="relative py-28 sm:py-36 bg-[#F7E9E8] text-[#282828]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <ScrollReveal>
             <p className="single-reveal text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12] mb-6">Portfolio</p>
             <div className="single-reveal mb-6">
-              <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="Featured">
+              <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl text-[#282828]" italicWord="Featured">
                 Featured projects you'll love.
               </SectionHeading>
             </div>
-            <p className="single-reveal text-[#F7E9E8]/50 text-base max-w-xl leading-relaxed mb-16">
+            <p className="single-reveal text-[#282828]/60 text-base max-w-xl leading-relaxed mb-16">
               A selection of projects focused on clarity, usability, and meaningful, lasting positive impact worldwide.
             </p>
           </ScrollReveal>
@@ -322,7 +319,7 @@ export default function App() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {PROJECTS.map((p) => (
                 <div key={p.title} className="reveal-card group">
-                  <TiltCard className="rounded-2xl border border-[#F7E9E8]/10 bg-[#F7E9E8]/[0.03] overflow-hidden">
+                  <TiltCard className="rounded-2xl border border-[#282828]/10 bg-white overflow-hidden shadow-[0_8px_30px_rgba(40,40,40,0.04)]">
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
                         src={p.img}
@@ -337,10 +334,10 @@ export default function App() {
                     </div>
                     <div className="p-6 space-y-2">
                       <div className="flex items-center justify-between">
-                        <h3 className="font-grotesk font-bold text-lg">{p.title}</h3>
-                        <ArrowUpRight className="w-4 h-4 text-[#F7E9E8]/30 group-hover:text-[#AD1D12] transition-colors duration-300" />
+                        <h3 className="font-grotesk font-bold text-lg text-[#282828]">{p.title}</h3>
+                        <ArrowUpRight className="w-4 h-4 text-[#282828]/30 group-hover:text-[#AD1D12] transition-colors duration-300" />
                       </div>
-                      <p className="text-[#F7E9E8]/50 text-sm">{p.desc}</p>
+                      <p className="text-[#282828]/60 text-sm">{p.desc}</p>
                     </div>
                   </TiltCard>
                 </div>
@@ -399,17 +396,17 @@ export default function App() {
       <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
 
       {/* ── Process ─────────────────────────────────────────────────────── */}
-      <section className="relative py-28 sm:py-36">
+      <section className="relative py-28 sm:py-36 bg-[#F7E9E8] text-[#282828]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <ScrollReveal>
             <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
               {/* Left */}
               <div className="single-reveal space-y-8">
                 <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12]">How I Work</p>
-                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="done.">
+                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl text-[#282828]" italicWord="done.">
                   See how I get things done.
                 </SectionHeading>
-                <p className="text-[#F7E9E8]/50 text-base leading-relaxed max-w-md">
+                <p className="text-[#282828]/60 text-base leading-relaxed max-w-md">
                   A structured approach to delivering clear and effective design solutions every time.
                 </p>
               </div>
@@ -417,7 +414,7 @@ export default function App() {
               {/* Right - steps */}
               <div className="space-y-0">
                 {PROCESS_STEPS.map((step, i) => (
-                  <div key={step.title} className="single-reveal flex gap-5 py-5 border-b border-[#F7E9E8]/8 group cursor-default">
+                  <div key={step.title} className="single-reveal flex gap-5 py-5 border-b border-[#282828]/10 group cursor-default">
                     <div className="w-8 h-8 rounded-lg bg-[#AD1D12]/10 flex items-center justify-center shrink-0 group-hover:bg-[#AD1D12] transition-colors duration-300">
                       <span className="text-[#AD1D12] font-grotesk font-bold text-xs group-hover:text-[#F7E9E8] transition-colors duration-300">
                         {i + 1}
@@ -425,7 +422,7 @@ export default function App() {
                     </div>
                     <div>
                       <h4 className="font-grotesk font-bold text-base group-hover:text-[#AD1D12] transition-colors duration-200">{step.title}</h4>
-                      <p className="text-[#F7E9E8]/40 text-sm mt-1">{step.desc}</p>
+                      <p className="text-[#282828]/60 text-sm mt-1">{step.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -436,11 +433,11 @@ export default function App() {
           {/* Quote card */}
           <ScrollReveal>
             <div className="single-reveal mt-20 max-w-xl ml-auto">
-              <TiltCard className="rounded-2xl border border-[#F7E9E8]/10 bg-[#F7E9E8]/[0.03] p-8">
-                <p className="text-[#F7E9E8]/70 text-base leading-relaxed italic">
+              <TiltCard className="rounded-2xl border border-[#282828]/10 bg-white p-8 shadow-[0_8px_30px_rgba(40,40,40,0.04)]">
+                <p className="text-[#282828]/80 text-base leading-relaxed italic">
                   "Great design is rarely accidental. It comes from clarity, structure, and thoughtful iteration."
                 </p>
-                <p className="text-[#F7E9E8]/30 text-sm mt-4">- CeeBanks</p>
+                <p className="text-[#282828]/50 text-sm mt-4">- CeeBanks</p>
               </TiltCard>
             </div>
           </ScrollReveal>
@@ -448,19 +445,19 @@ export default function App() {
       </section>
 
       {/* ── Divider */}
-      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#282828]/10 to-transparent" />
 
       {/* ── What Sets Me Apart ──────────────────────────────────────────── */}
-      <section className="relative py-28 sm:py-36">
+      <section className="relative py-28 sm:py-36 bg-[#F7E9E8] text-[#282828]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <ScrollReveal>
             <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
               <div className="single-reveal space-y-6">
                 <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#AD1D12]">Advantages</p>
-                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl" italicWord="apart.">
+                <SectionHeading className="text-4xl sm:text-5xl lg:text-6xl text-[#282828]" italicWord="apart.">
                   What sets me apart.
                 </SectionHeading>
-                <p className="text-[#F7E9E8]/50 text-base leading-relaxed max-w-md">
+                <p className="text-[#282828]/60 text-base leading-relaxed max-w-md">
                   A system-driven workflow to reduce delays, improve consistency,
                   and help teams execute ideas efficiently.
                 </p>
@@ -468,10 +465,10 @@ export default function App() {
 
               <div className="space-y-4">
                 {ADVANTAGES.map((a) => (
-                  <div key={a.label} className="single-reveal flex items-center justify-between py-4 px-5 rounded-xl border border-[#F7E9E8]/8 bg-[#F7E9E8]/[0.02] group hover:border-[#AD1D12]/20 transition-colors duration-300">
+                  <div key={a.label} className="single-reveal flex items-center justify-between py-4 px-5 rounded-xl border border-[#282828]/10 bg-white group hover:border-[#AD1D12]/20 transition-colors duration-300 shadow-[0_4px_20px_rgba(40,40,40,0.03)]">
                     <div className="flex items-center gap-3">
                       <ChevronRight className="w-4 h-4 text-[#AD1D12]" />
-                      <span className="font-medium text-sm sm:text-base">{a.label}</span>
+                      <span className="font-medium text-sm sm:text-base text-[#282828]">{a.label}</span>
                     </div>
                     <span className="px-3 py-1 rounded-full bg-[#AD1D12]/10 text-[#AD1D12] text-xs font-bold">
                       +{a.pct}%
@@ -485,7 +482,7 @@ export default function App() {
       </section>
 
       {/* ── Divider */}
-      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#F7E9E8]/10 to-transparent" />
+      <div className="max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-[#282828]/10 to-transparent" />
 
       {/* ── FAQ ─────────────────────────────────────────────────────────── */}
       <section id="faq" className="relative py-28 sm:py-36">
