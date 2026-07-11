@@ -111,7 +111,7 @@ export default function App() {
            </div>
 
            {/* Hero Image */}
-           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[75vh] md:h-[80vh] flex justify-center items-end z-20 pointer-events-none">
+           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[72vh] md:h-[77vh] flex justify-center items-end z-20 pointer-events-none">
               <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.25] origin-bottom" />
            </div>
 
