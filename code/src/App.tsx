@@ -116,7 +116,7 @@ export default function App() {
            </div>
 
            {/* Bottom Content overlay */}
-           <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-6 sm:pb-8 pointer-events-none px-4">
+           <div className="relative z-40 w-full max-w-7xl mx-auto flex flex-col items-center pb-0 pointer-events-none px-4">
               <div className="relative w-full flex justify-center">
                  <div className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 -rotate-3 z-50">Hello, my name is</div>
                  
