@@ -97,22 +97,22 @@ export default function App() {
           {/* Floating Skill Tags */}
           <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
             <div className="relative w-full max-w-5xl h-full hidden md:block">
-              <div style={{ transform: 'translateX(24px) translateY(96px)' }} className="absolute top-[25%] left-[20%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+              <div style={{ transform: 'translateX(24px) translateY(96px)' }} className="absolute top-[25%] left-[20%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
                 Web Design
               </div>
-              <div style={{ transform: 'translateX(-82.6667px) translateY(-43.3333px)' }} className="absolute top-[22%] right-[22%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+              <div style={{ transform: 'translateX(-82.6667px) translateY(-43.3333px)' }} className="absolute top-[22%] right-[22%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
                 Branding
               </div>
-              <div style={{ transform: 'translateX(190px) translateY(-158.667px)' }} className="absolute top-[40%] left-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+              <div style={{ transform: 'translateX(190px) translateY(-158.667px)' }} className="absolute top-[40%] left-[12%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
                 3D Motion
               </div>
-              <div style={{ transform: 'translateX(-64px) translateY(8.66669px)' }} className="absolute top-[38%] right-[15%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+              <div style={{ transform: 'translateX(-64px) translateY(8.66669px)' }} className="absolute top-[38%] right-[15%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
                 App Design
               </div>
-              <div style={{ transform: 'translateX(162.667px) translateY(56px)' }} className="absolute top-[55%] left-[18%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+              <div style={{ transform: 'translateX(162.667px) translateY(56px)' }} className="absolute top-[55%] left-[18%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
                 Illustration
               </div>
-              <div style={{ transform: 'translateX(-201.333px) translateY(77.3334px)' }} className="absolute top-[52%] right-[12%] bg-white/70 backdrop-blur-xl px-6 py-3 rounded-full font-bold text-sm text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
+              <div style={{ transform: 'translateX(-201.333px) translateY(77.3334px)' }} className="absolute top-[52%] right-[12%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">
                 Logo Design
               </div>
             </div>
