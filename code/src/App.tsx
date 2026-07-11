@@ -26,7 +26,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#282828] text-[#F7E9E8] transition-colors duration-300 antialiased relative flex flex-col selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden">
+    <div className="h-screen overflow-hidden bg-[#282828] text-[#F7E9E8] transition-colors duration-300 antialiased relative flex flex-col selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden">
 
       {/* Top Header / Navbar */}
       <div className="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
@@ -90,9 +90,9 @@ export default function App() {
         </div>
       )}
 
-      <div className="relative z-10 w-full flex flex-col">
+      <div className="relative z-10 w-full h-full flex flex-col">
         {/* Section 1: Hero Section */}
-        <section id="home" className="relative w-full h-[100dvh] min-h-[700px] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20">
+        <section id="home" className="relative w-full h-full flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20">
            
            {/* Background Text */}
            <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none z-0 w-full flex justify-center">
@@ -111,7 +111,7 @@ export default function App() {
            </div>
 
            {/* Hero Image */}
-           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[75vh] md:h-[85vh] flex justify-center items-end z-20 pointer-events-none">
+           <div className="absolute bottom-[15%] md:bottom-[20%] left-1/2 -translate-x-1/2 w-full max-w-5xl h-[70vh] md:h-[75vh] flex justify-center items-end z-20 pointer-events-none">
               <img src={ceebanksImg} alt="CeeBanks" className="h-full w-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] grayscale contrast-125 brightness-95 scale-[1.15] md:scale-[1.25] origin-bottom" />
            </div>
 
