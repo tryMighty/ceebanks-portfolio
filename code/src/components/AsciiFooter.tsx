@@ -315,9 +315,7 @@ export function AsciiFooter() {
           </nav>
           <div className="footer-text max-w-md text-right pointer-events-none">
             <p className="text-lg leading-relaxed text-white/70">
-              A multidisciplinary design studio working across web, branding and
-              motion. We build considered digital experiences for brands that care
-              about the details.
+              A strategic brand designer crafting iconic visual identities and cohesive design systems. I help visionary founders and teams build brands that command attention and drive growth.
             </p>
           </div>
         </div>
