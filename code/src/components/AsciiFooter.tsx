@@ -11,9 +11,9 @@ const CELL_SIZE = 20;
 const ASCII_COLUMNS = 80;
 const DPR = 2; // Assuming high DPI for crispness
 
-const CHAR_COLOR = "rgba(247, 233, 232, 0.15)";
-const HOVER_COLOR = "#F7E9E8"; // Light brand color
-const HOVER_CHAR_COLOR = "#282828"; // Dark brand color
+const CHAR_COLOR = "#F7E9E8"; // Light brand color
+const HOVER_COLOR = "#AD1D12"; // Red brand color
+const HOVER_CHAR_COLOR = "#F7E9E8"; // Light brand color for contrast against red
 
 const HOVER_RADIUS = 8;
 const CLUSTER_SIZE = 10;
@@ -124,7 +124,7 @@ export function AsciiFooter() {
       const canvasWidth = ASCII_COLUMNS * CELL_SIZE;
       const canvasHeight = rows * CELL_SIZE;
 
-      const handObj = { canvas, cells, cellList, rows, ctx, canvasWidth, canvasHeight, baselineOffset };
+      const handObj = { canvas, cells, cellList, rows, ctx, canvasWidth, canvasHeight, baselineOffset, wasHighlighted: true };
       return handObj;
     };
 
@@ -148,21 +148,33 @@ export function AsciiFooter() {
     const renderHands = () => {
       const now = Date.now();
       hands.forEach(hand => {
-        const { ctx, canvasWidth, canvasHeight, cellList, baselineOffset } = hand;
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-        for (const cell of cellList) {
-          const x = cell.col * CELL_SIZE;
-          const y = cell.row * CELL_SIZE;
-          const isHighlighted = cell.highlightEndTime > now;
-
-          if (isHighlighted) {
-            ctx.fillStyle = HOVER_COLOR;
-            ctx.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+        let handNeedsRedraw = false;
+        for (const cell of hand.cellList) {
+          if (cell.highlightEndTime > now) {
+            handNeedsRedraw = true;
+            break;
           }
+        }
 
-          ctx.fillStyle = isHighlighted ? HOVER_CHAR_COLOR : CHAR_COLOR;
-          ctx.fillText(cell.char, x + CELL_SIZE / 2, y + baselineOffset);
+        if (handNeedsRedraw || hand.wasHighlighted) {
+          hand.wasHighlighted = handNeedsRedraw;
+          
+          const { ctx, canvasWidth, canvasHeight, cellList, baselineOffset } = hand;
+          ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+          for (const cell of cellList) {
+            const x = cell.col * CELL_SIZE;
+            const y = cell.row * CELL_SIZE;
+            const isHighlighted = cell.highlightEndTime > now;
+
+            if (isHighlighted) {
+              ctx.fillStyle = HOVER_COLOR;
+              ctx.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+            }
+
+            ctx.fillStyle = isHighlighted ? HOVER_CHAR_COLOR : CHAR_COLOR;
+            ctx.fillText(cell.char, x + CELL_SIZE / 2, y + baselineOffset);
+          }
         }
       });
       animationFrameId = requestAnimationFrame(renderHands);
