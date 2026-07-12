@@ -140,6 +140,14 @@ export class FluidSimulation {
     window.addEventListener("touchmove", this.onTouchMove, { passive: false });
   }
 
+  destroy() {
+    window.removeEventListener("mousemove", this.onMove);
+    window.removeEventListener("touchmove", this.onTouchMove);
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+  }
+
   _pass(material, target) {
     this.quad.material = material;
     this.renderer.setRenderTarget(target ?? null);
@@ -286,7 +294,7 @@ export class FluidSimulation {
       }
       this._simulate(dt);
       this._render();
-      requestAnimationFrame(tick);
+      this.animationFrameId = requestAnimationFrame(tick);
     };
     tick();
   }
