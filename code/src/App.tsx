@@ -200,7 +200,7 @@ export default function App() {
         {/* Background BRAND DESIGNER watermark */}
         <div
           className="invertible absolute left-1/2 pointer-events-auto select-none z-0 flex flex-col items-center justify-center w-full"
-          style={{ top: '52%', transform: 'translateX(-50%) translateY(-50%)' }}
+          style={{ top: '48%', transform: 'translateX(-50%) translateY(-50%)' }}
         >
           <div ref={watermarkRef} className="flex flex-col items-center justify-center w-full">
             <h1 className="text-[22vw] font-black tracking-[-0.04em] text-[#282828]/[0.06] whitespace-nowrap font-grotesk leading-[0.85]">BRAND</h1>

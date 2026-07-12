@@ -16,7 +16,7 @@ export const FluidCursor: React.FC = () => {
       pressureIterations: 50,
       velocityDissipation: 0.95,
       dyeDissipation: 0.90,
-      splatRadius: 0.072,
+      splatRadius: 0.0648,
       forceStrength: 5.0,
       pressureDecay: 0.75,
       threshold: 0.2,
