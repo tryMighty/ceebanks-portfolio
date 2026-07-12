@@ -15,6 +15,7 @@ import { FAQItem } from './components/FAQItem';
 import { Marquee } from './components/Marquee';
 import { SectionHeading } from './components/SectionHeading';
 import { AsciiFooter } from './components/AsciiFooter';
+import { FluidCursor } from './components/FluidCursor';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,7 +65,6 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
   const [showDemoModal, setShowDemoModal] = useState<string | null>(null);
-  const cursorGlowRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
   
   const imageRef = useRef<HTMLImageElement>(null);
@@ -99,14 +99,10 @@ export default function App() {
     return () => lenis.destroy();
   }, []);
 
-  /* Mouse-following glow and parallax */
+  /* Parallax effect for mouse */
   useEffect(() => {
-    const glow = cursorGlowRef.current;
     const onMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
-      if (glow) {
-        gsap.to(glow, { x: clientX, y: clientY, duration: 0.6, ease: 'power2.out' });
-      }
 
       // Parallax effect
       if (!isParallaxActive.current) return;
@@ -155,17 +151,6 @@ export default function App() {
     <div className="min-h-screen text-[#F7E9E8] antialiased relative selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden bg-transparent">
       
       <main className="relative z-10 bg-[#282828] overflow-hidden">
-      {/* Mouse-follow glow */}
-      <div
-        ref={cursorGlowRef}
-        className="fixed w-[400px] h-[400px] rounded-full pointer-events-none z-[1] hidden md:block"
-        style={{
-          background: 'radial-gradient(circle, rgba(173,29,18,0.06) 0%, transparent 70%)',
-          transform: 'translate(-50%, -50%)',
-          willChange: 'transform',
-        }}
-      />
-
       {/* ── Navbar ───────────────────────────────────────────────────────── */}
       <div ref={navRef} className="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6 will-change-transform">
         <header className="w-full px-6 py-3 rounded-2xl flex items-center justify-between backdrop-blur-xl border border-black/10 bg-white/10 text-[#282828] shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-300">
@@ -221,9 +206,12 @@ export default function App() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20 select-none touch-manipulation">
 
+        {/* WebGL Fluid Cursor Trail */}
+        <FluidCursor />
+
         {/* Background BRAND DESIGNER watermark */}
         <div
-          className="absolute left-1/2 pointer-events-none select-none z-0 flex flex-col items-center justify-center w-full"
+          className="invertible absolute left-1/2 pointer-events-auto select-none z-0 flex flex-col items-center justify-center w-full"
           style={{ top: '52%', transform: 'translateX(-50%) translateY(-50%)' }}
         >
           <div ref={watermarkRef} className="flex flex-col items-center justify-center w-full">
@@ -235,10 +223,10 @@ export default function App() {
         {/* Floating Skill Tags */}
         <div className="absolute inset-0 z-30 pointer-events-none flex justify-center">
           <div ref={tagsRef} className="relative w-full max-w-5xl h-full hidden md:block">
-            <div className="absolute top-[28%] left-[14%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Brand Strategy</div>
-            <div className="absolute top-[26%] right-[13%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Visual Identity</div>
-            <div className="absolute top-[52%] left-[6%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Logo Design</div>
-            <div className="absolute top-[50%] right-[7%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Typography</div>
+            <div className="invertible pointer-events-auto absolute top-[28%] left-[14%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Brand Strategy</div>
+            <div className="invertible pointer-events-auto absolute top-[26%] right-[13%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Visual Identity</div>
+            <div className="invertible pointer-events-auto absolute top-[52%] left-[6%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Logo Design</div>
+            <div className="invertible pointer-events-auto absolute top-[50%] right-[7%] bg-white/70 backdrop-blur-xl px-5 py-2 rounded-full font-bold text-xs text-[#282828] shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/60">Typography</div>
           </div>
         </div>
 
@@ -252,16 +240,16 @@ export default function App() {
           <div className="relative w-full flex justify-center">
             <div ref={bubblesRef} className="absolute w-full h-full z-50 pointer-events-none">
               <div style={{ transform: 'translateX(38.666656px) translateY(34.666626px)' }}
-                className="absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 pointer-events-auto">
+                className="invertible absolute -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 pointer-events-auto">
                 Hello, my name is
               </div>
               <div style={{ transform: 'translateX(108.666687px) translateY(52.666626px)' }}
-                className="absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 pointer-events-auto">
+                className="invertible absolute -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 pointer-events-auto">
                 Let's work together!
               </div>
             </div>
             <h2
-              className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk"
+              className="invertible pointer-events-auto text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk"
               style={{
                 background: 'linear-gradient(to bottom, #282828 30%, #28282855 70%, #28282800 100%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
