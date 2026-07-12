@@ -12,15 +12,15 @@ export const FluidCursor: React.FC = () => {
     const config = {
       simResolution: 256,
       dyeResolution: 1024,
-      curl: 25,
+      curl: 15,
       pressureIterations: 50,
-      velocityDissipation: 0.98,
-      dyeDissipation: 0.99,
-      splatRadius: 0.6,
-      forceStrength: 7.5,
+      velocityDissipation: 0.95,
+      dyeDissipation: 0.90,
+      splatRadius: 0.072,
+      forceStrength: 5.0,
       pressureDecay: 0.75,
-      threshold: 1.0,
-      edgeSoftness: 0.0,
+      threshold: 0.2,
+      edgeSoftness: 0.5,
       inkColor: new THREE.Color(1, 1, 1),
     };
 

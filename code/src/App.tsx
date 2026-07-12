@@ -74,19 +74,7 @@ export default function App() {
   const isParallaxActive = useRef(true);
 
   useEffect(() => {
-    // Hide nav when reaching the footer
-    const st = ScrollTrigger.create({
-      trigger: "main",
-      start: "bottom 90%", // when the bottom of main is near the bottom of viewport
-      onEnter: () => {
-        if (navRef.current) gsap.to(navRef.current, { y: -100, opacity: 0, duration: 0.3, ease: 'power2.out' });
-      },
-      onLeaveBack: () => {
-        if (navRef.current) gsap.to(navRef.current, { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' });
-      }
-    });
-
-    return () => st.kill();
+    // Nav hiding logic removed since nav is no longer fixed
   }, []);
 
   /* Lenis smooth scroll */
@@ -152,8 +140,8 @@ export default function App() {
       
       <main className="relative z-10 bg-[#282828] overflow-hidden">
       {/* ── Navbar ───────────────────────────────────────────────────────── */}
-      <div ref={navRef} className="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6 will-change-transform">
-        <header className="w-full px-6 py-3 rounded-2xl flex items-center justify-between backdrop-blur-xl border border-black/10 bg-white/10 text-[#282828] shadow-[0_8px_30px_rgba(0,0,0,0.05)] transition-all duration-300">
+      <div ref={navRef} className="absolute top-0 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
+        <header className="w-full py-2 flex items-center justify-between text-[#282828] transition-all duration-300">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('Home')}>
             <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-[#282828] p-[1.5px] shadow-[0_4px_20px_rgba(40,40,40,0.15)] transition-transform duration-200 active:scale-[0.97]">
               <div className="w-full h-full bg-[#282828] rounded-[10px] flex items-center justify-center">
@@ -187,7 +175,7 @@ export default function App() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="fixed top-20 left-0 w-full z-40 px-4 sm:px-6 md:hidden animate-in fade-in slide-in-from-top duration-200">
+        <div className="absolute top-20 left-0 w-full z-40 px-4 sm:px-6 md:hidden animate-in fade-in slide-in-from-top duration-200">
           <div className="w-full px-6 py-4 rounded-xl backdrop-blur-xl border bg-[#282828]/95 border-[#F7E9E8]/10 shadow-xl shadow-black/30">
             <div className="flex flex-col gap-4 py-2">
               {['Home', 'About', 'Portfolio', 'Services', 'FAQ', 'Contact'].map((item) => (
