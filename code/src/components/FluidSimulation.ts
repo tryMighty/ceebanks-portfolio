@@ -14,7 +14,7 @@ export class FluidSimulation {
   }
 
   _setupRenderer(canvas) {
-    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: false });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     this.renderer.setSize(innerWidth, innerHeight);
     this.dpr = this.renderer.getPixelRatio();
