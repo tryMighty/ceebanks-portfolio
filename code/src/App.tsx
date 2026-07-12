@@ -71,6 +71,7 @@ export default function App() {
   const watermarkRef = useRef<HTMLDivElement>(null);
   const tagsRef = useRef<HTMLDivElement>(null);
   const bubblesRef = useRef<HTMLDivElement>(null);
+  const isParallaxActive = useRef(true);
 
   useEffect(() => {
     // Hide nav when reaching the footer
@@ -108,6 +109,8 @@ export default function App() {
       }
 
       // Parallax effect
+      if (!isParallaxActive.current) return;
+      
       const { innerWidth, innerHeight } = window;
       const x = (clientX - innerWidth / 2) / innerWidth;
       const y = (clientY - innerHeight / 2) / innerHeight;
@@ -133,6 +136,19 @@ export default function App() {
     }
     setActiveTab(id);
     setMobileMenuOpen(false);
+  };
+
+  const handleDoubleClick = () => {
+    isParallaxActive.current = false;
+    gsap.to([imageRef.current, watermarkRef.current, tagsRef.current, bubblesRef.current], {
+      x: 0,
+      y: 0,
+      duration: 1,
+      ease: 'power2.out',
+      onComplete: () => {
+        isParallaxActive.current = true;
+      }
+    });
   };
 
   return (
@@ -203,7 +219,7 @@ export default function App() {
       )}
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section id="home" className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20">
+      <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20 select-none touch-manipulation">
 
         {/* Background BRAND DESIGNER watermark */}
         <div
