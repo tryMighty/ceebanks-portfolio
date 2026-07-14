@@ -258,7 +258,10 @@ export default function App() {
                 background: 'linear-gradient(to bottom, #282828 30%, #28282855 70%, #28282800 100%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               }}>
-              CeeBanks<span style={{ WebkitTextFillColor: '#AD1D12' }}>.</span>
+              CeeBanks<span style={{
+                background: 'linear-gradient(to bottom, #AD1D12 30%, #AD1D1255 70%, #AD1D1200 100%)',
+                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+              }}>.</span>
             </h2>
           </div>
         </div>
