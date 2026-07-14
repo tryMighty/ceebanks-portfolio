@@ -87,6 +87,8 @@ export default function App() {
     return () => lenis.destroy();
   }, []);
 
+  const parallaxTimeoutRef = useRef<number | null>(null);
+
   /* Parallax effect for mouse */
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -103,9 +105,23 @@ export default function App() {
       if (watermarkRef.current) gsap.to(watermarkRef.current, { x: x * -60, y: y * -60, duration: 1, ease: 'power2.out' });
       if (tagsRef.current) gsap.to(tagsRef.current, { x: x * 70, y: y * 70, duration: 1, ease: 'power2.out' });
       if (bubblesRef.current) gsap.to(bubblesRef.current, { x: x * 50, y: y * 50, duration: 1, ease: 'power2.out' });
+
+      // Reset after 10s of inactivity
+      if (parallaxTimeoutRef.current) clearTimeout(parallaxTimeoutRef.current);
+      parallaxTimeoutRef.current = window.setTimeout(() => {
+        gsap.to([imageRef.current, watermarkRef.current, tagsRef.current, bubblesRef.current], {
+          x: 0,
+          y: 0,
+          duration: 1.5,
+          ease: 'power2.out'
+        });
+      }, 10000);
     };
     window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      if (parallaxTimeoutRef.current) clearTimeout(parallaxTimeoutRef.current);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -143,12 +159,7 @@ export default function App() {
       <div ref={navRef} className="absolute top-0 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
         <header className="w-full py-2 flex items-center justify-between text-[#282828] transition-all duration-300">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('Home')}>
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-[#282828] p-[1.5px] shadow-[0_4px_20px_rgba(40,40,40,0.15)] transition-transform duration-200 active:scale-[0.97]">
-              <div className="w-full h-full bg-[#282828] rounded-[10px] flex items-center justify-center">
-                <span className="font-grotesk font-extrabold text-lg tracking-tighter text-[#F7E9E8]">CB</span>
-              </div>
-            </div>
-            <span className="font-grotesk font-bold tracking-tight text-lg hidden sm:inline-block">CeeBanks</span>
+            <span className="font-grotesk font-bold tracking-tight text-lg">CeeBanks<span className="text-[#AD1D12]">.</span></span>
           </div>
 
           <nav className="hidden md:flex items-center gap-8 lg:gap-10">
@@ -164,7 +175,7 @@ export default function App() {
 
           <div className="flex items-center gap-4">
             <button onClick={() => scrollToSection('Contact')}
-              className="px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide transition-[background,color,transform] duration-200 ease-out active:scale-[0.97] border cursor-pointer border-[#282828] text-[#F7E9E8] bg-[#282828] hover:bg-[#282828]/80 shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
+              className="px-6 py-2.5 rounded-xl text-sm font-medium tracking-wide transition-[background,color,transform] duration-200 ease-out active:scale-[0.97] border cursor-pointer border-[#AD1D12] text-[#F7E9E8] bg-[#AD1D12] hover:bg-[#AD1D12]/90 shadow-[0_4px_20px_rgba(173,29,18,0.25)]">
               Get In Touch
             </button>
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-lg hover:bg-black/5 cursor-pointer text-[#282828] active:scale-[0.97] transition-transform duration-200 ease-out">
@@ -231,13 +242,13 @@ export default function App() {
                 className="invertible absolute z-50 -top-5 sm:-top-8 left-[8%] sm:left-[15%] lg:left-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 hover:scale-105 transition-transform duration-200"
                 style={{ transform: 'translate(12.5px, 34.1667px)' }}
               >
-                <span className="text-[#AD1D12]">Hello,</span> my name is
+                Hello, my name is
               </div>
               <div 
                 className="invertible absolute z-50 -top-8 sm:-top-12 right-[8%] sm:right-[15%] lg:right-[22%] bg-white/90 backdrop-blur-md px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold text-[#282828] shadow-lg border border-black/5 hover:scale-105 transition-transform duration-200"
                 style={{ transform: 'translate(95.8333px, 53.3334px)' }}
               >
-                Let's work <span className="text-[#AD1D12]">together!</span>
+                Let's work together!
               </div>
             </div>
 
