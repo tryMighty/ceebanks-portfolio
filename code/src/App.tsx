@@ -15,6 +15,7 @@ import { FAQItem } from './components/FAQItem';
 import { Marquee } from './components/Marquee';
 import { SectionHeading } from './components/SectionHeading';
 import { AsciiFooter } from './components/AsciiFooter';
+import { TryoutSection } from './components/TryoutSection';
 import { FluidCursor } from './components/FluidCursor';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -266,6 +267,10 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* ── Tryout Section ──────────────────────────────────────────────── */}
+      <TryoutSection />
+      
       </main>
 
       {/* ── Ascii Footer ────────────────────────────────────────────────── */}
