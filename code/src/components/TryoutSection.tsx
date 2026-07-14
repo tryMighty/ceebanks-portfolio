@@ -3,14 +3,14 @@ import { ArrowRight, Handshake, Settings, Send, Target, Sparkles, TrendingUp, Cr
 
 export function TryoutSection() {
   return (
-    <section className="w-full bg-[#F7E9E8] py-20 px-4 sm:px-6 z-20 relative text-[#282828]">
+    <section className="w-full bg-[#F7E9E8] py-12 md:py-20 px-4 sm:px-6 z-20 relative text-[#282828]">
       <div className="max-w-7xl mx-auto flex flex-col gap-6">
         
         {/* Top Row: "How We Work?" and Red Card side by side */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
           {/* Top Card: How We Work? */}
-          <div className="lg:col-span-2 bg-[#F7E9E8] rounded-3xl p-8 lg:p-12 border border-[#E5D5D3]">
+          <div className="lg:col-span-2 bg-[#F7E9E8] rounded-3xl p-6 md:p-8 lg:p-12 border border-[#E5D5D3]">
             <div className="flex flex-col gap-12 h-full">
               <div className="flex-1 flex flex-col items-start">
                 <span className="text-[#AD1D12] text-xs font-bold tracking-widest uppercase mb-4">How We Work?</span>
@@ -26,7 +26,7 @@ export function TryoutSection() {
                 {/* Horizontal Timeline Line for sm/lg screens */}
                 <div className="hidden sm:block absolute top-6 left-12 right-12 h-[1px] bg-[#E5D5D3] -z-10"></div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {/* Step 1 */}
                   <div className="flex flex-col relative z-10">
                     <div className="w-12 h-12 bg-[#F7E9E8] rounded-xl border border-[#E5D5D3] flex items-center justify-center mb-6 relative">
@@ -81,7 +81,7 @@ export function TryoutSection() {
           </div>
 
           {/* Right Column - Tall Red Card */}
-          <div className="bg-[#AD1D12] rounded-3xl p-8 lg:p-12 text-[#F7E9E8] relative overflow-hidden flex flex-col justify-between h-full">
+          <div className="bg-[#AD1D12] rounded-3xl p-6 md:p-8 lg:p-12 text-[#F7E9E8] relative overflow-hidden flex flex-col justify-between h-full">
             {/* Abstract background graphics representing the ribbons */}
             <div className="absolute bottom-0 right-0 w-full h-[60%] opacity-40 pointer-events-none">
               <div className="absolute bottom-[-10%] -right-[10%] w-[120%] h-[120%] bg-gradient-to-tr from-[#FF3333] to-transparent rounded-full blur-3xl mix-blend-overlay"></div>
@@ -108,7 +108,7 @@ export function TryoutSection() {
         </div>
 
         {/* Bottom Row: "Why Choose Us?" taking full width */}
-        <div className="bg-[#F7E9E8] rounded-3xl p-8 lg:p-12 border border-[#E5D5D3]">
+        <div className="bg-[#F7E9E8] rounded-3xl p-6 md:p-8 lg:p-12 border border-[#E5D5D3]">
           <div className="flex flex-col gap-12 h-full">
             <div className="flex-1 flex flex-col items-start">
               <span className="text-[#AD1D12] text-xs font-bold tracking-widest uppercase mb-2">Why Choose Us?</span>

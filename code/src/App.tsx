@@ -204,7 +204,7 @@ export default function App() {
       )}
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[40px] shadow-2xl z-20 select-none touch-manipulation">
+      <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-[85svh] lg:h-[100svh] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[30px] lg:rounded-b-[40px] shadow-2xl z-20 select-none touch-manipulation">
 
         {/* WebGL Fluid Cursor Trail */}
         <FluidCursor />

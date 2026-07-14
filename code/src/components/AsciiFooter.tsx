@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ceebanksImg from '../../ceebanks.png';
@@ -310,15 +310,15 @@ export function AsciiFooter() {
 
   return (
     <>
-      <div ref={revealerRef} className="relative w-full h-[100svh] z-10 pointer-events-none"></div>
-      <footer ref={footerRef} className="fixed top-0 left-0 w-full h-[100svh] bg-[#282828] overflow-hidden z-0 font-grotesk">
+      <div ref={revealerRef} className="relative w-full h-[75svh] lg:h-[100svh] z-10 pointer-events-none"></div>
+      <footer ref={footerRef} className="fixed bottom-0 left-0 w-full h-[75svh] lg:h-[100svh] bg-[#282828] overflow-hidden z-0 font-grotesk">
         <div className="absolute inset-0 flex justify-center items-center px-10 opacity-60">
           <div className="footer-hand-img relative w-[50%] max-w-[500px] min-w-[250px] will-change-transform">
             <img ref={leftHandRef} className="ascii-hand block w-full opacity-0" src={ceebanksImg} alt="" crossOrigin="anonymous" />
           </div>
         </div>
 
-        <div className="absolute top-0 left-0 w-full p-10 flex flex-col md:flex-row justify-between gap-8 text-white z-10">
+        <div className="absolute top-0 left-0 w-full p-6 md:p-10 flex flex-col md:flex-row justify-between gap-8 text-white z-10">
           <nav className="footer-links flex flex-col gap-2">
             <a href="#about" className="text-white no-underline text-lg hover:text-[#AD1D12] transition-colors">About</a>
             <a href="#portfolio" className="text-white no-underline text-lg hover:text-[#AD1D12] transition-colors">Portfolio</a>
