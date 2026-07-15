@@ -15,7 +15,6 @@ import { FAQItem } from './components/FAQItem';
 import { Marquee } from './components/Marquee';
 import { SectionHeading } from './components/SectionHeading';
 import { AsciiFooter } from './components/AsciiFooter';
-import { TryoutSection } from './components/TryoutSection';
 import { FluidCursor } from './components/FluidCursor';
 import { AboutTextScroll } from './components/AboutTextScroll';
 
@@ -156,7 +155,7 @@ export default function App() {
   return (
     <div className="min-h-screen text-[#F7E9E8] antialiased relative selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden bg-transparent">
       
-      <main className="relative z-10 bg-[#282828] overflow-hidden">
+      <main className="relative z-10 bg-[#282828] overflow-hidden rounded-b-[30px] lg:rounded-b-[40px] shadow-[0_30px_60px_rgba(0,0,0,0.5)] border-b border-black/20">
       {/* ── Navbar ───────────────────────────────────────────────────────── */}
       <div ref={navRef} className="absolute top-0 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
         <header className="w-full py-2 flex items-center justify-between text-[#282828] transition-all duration-300">
@@ -271,9 +270,6 @@ export default function App() {
 
       {/* ── About Text Scroll ─────────────────────────────────────────── */}
       <AboutTextScroll />
-
-      {/* ── Tryout Section ──────────────────────────────────────────────── */}
-      <TryoutSection />
       
       </main>
 

@@ -10,8 +10,9 @@ export const AboutTextScroll: React.FC = () => {
   const text2Ref = useRef<HTMLHeadingElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
   
-  const text1 = "A space for brands shaped with clarity and intention. Each identity follows a simple path from core values to visual form, from form to lasting impression.";
-  const text2 = "I craft brand identities and visual systems that value strategy above excess. Through minimal design and precise storytelling, I aim to build brands that stand out and offer a clear sense of purpose.";
+  const text1 = "Successful brands\ndon't just look good\nThey earn trust\nbefore a word is said";
+  
+  const text2 = "I build brand identities\nthat move beyond a logo\n\nStrategy, visual systems and\ntypography working together\nto make your business\nlook as beautiful and sharp\nas the work you put into it";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -98,7 +99,7 @@ export const AboutTextScroll: React.FC = () => {
     <div ref={containerRef} className="scroll-animation-wrapper">
       <section className="about">
         <h2 
-          className="animate-text font-grotesk text-center max-w-5xl" 
+          className="animate-text font-grotesk text-center w-full px-4" 
           ref={text1Ref} 
           data-text={text1}
         >
@@ -114,7 +115,7 @@ export const AboutTextScroll: React.FC = () => {
 
       <section className="services-copy">
         <h2 
-          className="animate-text font-grotesk text-center max-w-5xl" 
+          className="animate-text font-grotesk text-center w-full px-4" 
           ref={text2Ref} 
           data-text={text2}
         >
