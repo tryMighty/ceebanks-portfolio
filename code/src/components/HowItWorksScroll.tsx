@@ -4,15 +4,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const AboutTextScroll: React.FC = () => {
+export const HowItWorksScroll: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const text1Ref = useRef<HTMLHeadingElement>(null);
   const text2Ref = useRef<HTMLHeadingElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
   
-  const text1 = "Successful brands\ndon't just look good\nThey earn trust\nbefore a word is said";
+  const text1 = "A great brand isn't an accident\nIt's the result of a deliberate process";
   
-  const text2 = "I build brand identities\nthat move beyond a logo\n\nStrategy, visual systems and\ntypography working together\nto make your business\nlook as beautiful and sharp\nas the work you put into it";
+  const text2 = "1. Discover & Define\n\n2. Design & Refine\n\n3. Deliver & Launch";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -97,7 +97,7 @@ export const AboutTextScroll: React.FC = () => {
 
   return (
     <div ref={containerRef} className="scroll-animation-wrapper">
-      <section className="about">
+      <section className="about" style={{ minHeight: 'auto', paddingTop: '10vh', paddingBottom: '10vh' }}>
         <h2 
           className="animate-text font-grotesk text-center w-full px-4" 
           ref={text1Ref} 
@@ -108,12 +108,12 @@ export const AboutTextScroll: React.FC = () => {
       </section>
 
       <section className="services" ref={servicesRef}>
-        <div className="services-header flex justify-center"><h2 className="text-[15vw] font-black font-grotesk leading-none text-[#F7E9E8] tracking-tighter whitespace-nowrap">WHAT I DO</h2></div>
-        <div className="services-header flex justify-center"><h2 className="text-[15vw] font-black font-grotesk leading-none text-[#F7E9E8] tracking-tighter whitespace-nowrap">WHAT I DO</h2></div>
-        <div className="services-header flex justify-center"><h2 className="text-[15vw] font-black font-grotesk leading-none text-[#F7E9E8] tracking-tighter whitespace-nowrap">WHAT I DO</h2></div>
+        <div className="services-header flex justify-center"><h2 className="text-[12vw] font-black font-grotesk leading-none text-[#F7E9E8] tracking-tighter whitespace-nowrap">HOW IT WORKS</h2></div>
+        <div className="services-header flex justify-center"><h2 className="text-[12vw] font-black font-grotesk leading-none text-[#F7E9E8] tracking-tighter whitespace-nowrap">HOW IT WORKS</h2></div>
+        <div className="services-header flex justify-center"><h2 className="text-[12vw] font-black font-grotesk leading-none text-[#F7E9E8] tracking-tighter whitespace-nowrap">HOW IT WORKS</h2></div>
       </section>
 
-      <section className="services-copy" style={{ paddingBottom: '10svh' }}>
+      <section className="services-copy">
         <h2 
           className="animate-text font-grotesk text-center w-full px-4" 
           ref={text2Ref} 

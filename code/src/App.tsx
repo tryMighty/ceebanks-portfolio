@@ -17,6 +17,7 @@ import { SectionHeading } from './components/SectionHeading';
 import { AsciiFooter } from './components/AsciiFooter';
 import { FluidCursor } from './components/FluidCursor';
 import { AboutTextScroll } from './components/AboutTextScroll';
+import { HowItWorksScroll } from './components/HowItWorksScroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -270,6 +271,9 @@ export default function App() {
 
       {/* ── About Text Scroll ─────────────────────────────────────────── */}
       <AboutTextScroll />
+
+      {/* ── How It Works Scroll ──────────────────────────────────────── */}
+      <HowItWorksScroll />
       
       </main>
 
