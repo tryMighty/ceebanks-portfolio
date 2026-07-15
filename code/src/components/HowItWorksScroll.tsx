@@ -113,7 +113,7 @@ export const HowItWorksScroll: React.FC = () => {
         <div className="services-header flex justify-center"><h2 className="text-[12vw] font-black font-grotesk leading-none text-[#F7E9E8] tracking-tighter whitespace-nowrap">HOW IT WORKS</h2></div>
       </section>
 
-      <section className="services-copy">
+      <section className="services-copy" style={{ paddingBottom: '55svh' }}>
         <h2 
           className="animate-text font-grotesk text-center w-full px-4" 
           ref={text2Ref} 
