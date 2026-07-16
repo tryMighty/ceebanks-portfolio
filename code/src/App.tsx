@@ -1,19 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, Sparkles, Globe, Palette, Smartphone, PenTool, Box, Layers, ArrowUpRight, Mail, Instagram, Twitter, Linkedin, ChevronRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import ceebanksImg from '../ceebanks.png';
-import elanImg from '../assets/elan-collective.jpg';
-import bloomImg from '../assets/bloom-illustrations.jpg';
-import techImg from '../assets/tech-startup.jpg';
 
-import { ScrollReveal } from './components/ScrollReveal';
-import { TiltCard } from './components/TiltCard';
-import { StatCounter } from './components/StatCounter';
-import { FAQItem } from './components/FAQItem';
-import { Marquee } from './components/Marquee';
-import { SectionHeading } from './components/SectionHeading';
 import { AsciiFooter } from './components/AsciiFooter';
 import { FluidCursor } from './components/FluidCursor';
 import { AboutTextScroll } from './components/AboutTextScroll';
@@ -21,52 +12,12 @@ import { HowItWorksScroll } from './components/HowItWorksScroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── Data ──────────────────────────────────────────────────────────────── */
-const SERVICES = [
-  { icon: Globe, title: 'Web Design', desc: 'Designing modern, responsive websites with clean visuals and UX.' },
-  { icon: Smartphone, title: 'App Design', desc: 'Creating intuitive mobile and web interfaces that are easy to use.' },
-  { icon: Palette, title: 'Branding', desc: 'Building visual identities that clearly and consistently represent brands.' },
-  { icon: PenTool, title: 'Illustration', desc: 'Creating custom visuals that add personality and visual storytelling.' },
-  { icon: Box, title: '3D Motion', desc: 'Designing 3D visuals and motion to add depth and energy.' },
-  { icon: Layers, title: 'Logo Design', desc: 'Crafting unique logos that clearly express your unique brand.' },
-];
 
-const PROCESS_STEPS = [
-  { title: 'Discover', desc: 'Understanding goals, users, and challenges.' },
-  { title: 'Define', desc: 'Structuring flows and defining direction.' },
-  { title: 'Design', desc: 'Creating intuitive and refined solutions.' },
-  { title: 'Refine', desc: 'Iterating through feedback and testing.' },
-  { title: 'Deliver', desc: 'Producing polished, ready-for-use assets.' },
-];
-
-const ADVANTAGES = [
-  { label: 'Faster delivery', pct: 87, color: '#AD1D12' },
-  { label: 'More automated', pct: 82, color: '#AD1D12' },
-  { label: 'Reduced revision cycles', pct: 76, color: '#AD1D12' },
-  { label: 'Consistent on all screen', pct: 70, color: '#AD1D12' },
-  { label: 'Designed for growth', pct: 58, color: '#AD1D12' },
-];
-
-const FAQS = [
-  { q: 'What is your typical project timeline?', a: 'Most branding and web design projects take 4-8 weeks from kickoff to delivery. Timelines vary based on scope, but I always provide a detailed schedule upfront so you know exactly what to expect.' },
-  { q: 'How does your pricing work?', a: 'I offer project-based pricing tailored to your needs. After an initial consultation, I provide a detailed proposal with transparent costs. No hidden fees, no hourly surprises.' },
-  { q: 'What does your design process look like?', a: 'My process follows five stages: Discover, Define, Design, Refine, and Deliver. Each phase includes checkpoints so you stay involved and informed throughout the journey.' },
-  { q: 'How many revisions are included?', a: 'Each project includes 2-3 rounds of revisions at key milestones. My collaborative approach means we align early, so major reworks are rare. Additional rounds can be arranged if needed.' },
-  { q: 'What deliverables will I receive?', a: 'You receive all source files, exported assets, brand guidelines (for branding projects), and developer-ready specs. Everything is organized and clearly labeled for your team.' },
-  { q: 'Do you work with international clients?', a: 'Absolutely. I work with clients globally across different time zones. Communication happens async through structured updates, with live calls scheduled at mutually convenient times.' },
-];
-
-const PROJECTS = [
-  { title: 'Elan Collective', desc: 'Minimal identity for a luxury fashion brand.', img: elanImg, tag: 'Branding' },
-  { title: 'Bloom Illustrations', desc: 'Creative illustrations crafted for modern digital products.', img: bloomImg, tag: 'Illustration' },
-  { title: 'NovaTech Dashboard', desc: 'UI/UX design for a tech analytics platform.', img: techImg, tag: 'UI/UX' },
-];
 
 /* ─── App ───────────────────────────────────────────────────────────────── */
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
-  const [showDemoModal, setShowDemoModal] = useState<string | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
   
   const imageRef = useRef<HTMLImageElement>(null);
@@ -280,30 +231,7 @@ export default function App() {
       {/* ── Ascii Footer ────────────────────────────────────────────────── */}
       <AsciiFooter />
 
-      {/* ── Demo Modal ───────────────────────────────────────────────────── */}
-      {showDemoModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-lg bg-[#282828]/95 text-[#F7E9E8] border border-[#F7E9E8]/10 p-6 sm:p-8 rounded-2xl shadow-2xl backdrop-blur-xl">
-            <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#F7E9E8]/10">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#AD1D12] animate-pulse" />
-                <h3 className="font-grotesk font-bold text-xl">{showDemoModal}</h3>
-              </div>
-              <button onClick={() => setShowDemoModal(null)}
-                className="p-1 rounded-lg text-[#F7E9E8]/50 hover:text-[#F7E9E8] hover:bg-[#F7E9E8]/5 cursor-pointer">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <p className="text-sm leading-relaxed mb-6 text-[#F7E9E8]/80">
-              You clicked on <strong className="text-[#AD1D12]">{showDemoModal}</strong>.
-            </p>
-            <button onClick={() => setShowDemoModal(null)}
-              className="w-full py-3.5 bg-[#AD1D12] hover:bg-[#AD1D12]/90 text-[#F7E9E8] font-semibold rounded-xl text-sm transition-all shadow-lg shadow-[#AD1D12]/20 cursor-pointer">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+
 
     </div>
   );
