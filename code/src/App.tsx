@@ -156,7 +156,7 @@ export default function App() {
       )}
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-[85svh] lg:h-[100svh] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[30px] lg:rounded-b-[40px] shadow-2xl z-20 select-none touch-manipulation">
+      <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-[85svh] lg:h-[100svh] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[30px] lg:rounded-b-[40px] z-20 select-none touch-manipulation">
 
         {/* WebGL Fluid Cursor Trail */}
         <FluidCursor />
@@ -219,6 +219,13 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* ── Inverted CeeBanks Text ─────────────────────────────────────────── */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center px-4 mt-0 mb-16 sm:mb-24 lg:mb-32 pointer-events-none">
+        <h2 className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk text-[#F7E9E8]">
+          CeeBanks<span className="text-[#AD1D12]">.</span>
+        </h2>
+      </div>
 
       {/* ── About Text Scroll ─────────────────────────────────────────── */}
       <AboutTextScroll />
