@@ -26,6 +26,9 @@ export default function App() {
   const bubblesRef = useRef<HTMLDivElement>(null);
   const isParallaxActive = useRef(true);
 
+  const aboutSectionRef = useRef<HTMLElement>(null);
+  const aboutTextRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Nav hiding logic removed since nav is no longer fixed
   }, []);
@@ -38,6 +41,30 @@ export default function App() {
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.lagSmoothing(0);
     return () => lenis.destroy();
+  }, []);
+
+  /* About Section Scroll Pin & Text Reveal */
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (aboutSectionRef.current && aboutTextRef.current) {
+        ScrollTrigger.create({
+          trigger: aboutSectionRef.current,
+          start: "top top",
+          end: "+=150%", // Keep pinned for 1.5x viewport height
+          pin: true,
+          scrub: 1,
+          refreshPriority: 1, // Force this pin to be calculated before downstream triggers
+          onUpdate: (self) => {
+            const clipValue = Math.max(0, 100 - self.progress * 100);
+            aboutTextRef.current?.style.setProperty('clip-path', `inset(0 0 ${clipValue}% 0)`);
+          }
+        });
+        
+        // Force an immediate refresh after creation to ensure downstream triggers recalculate their positions
+        ScrollTrigger.refresh();
+      }
+    });
+    return () => ctx.revert();
   }, []);
 
   const parallaxTimeoutRef = useRef<number | null>(null);
@@ -221,7 +248,7 @@ export default function App() {
       </section>
 
       {/* ── About Section ────────────────────────────────────────────────── */}
-      <section id="about" className="relative w-full overflow-hidden bg-[#282828] pt-0 pb-16 lg:pb-24">
+      <section ref={aboutSectionRef} id="about" className="relative w-full overflow-hidden bg-[#282828] pt-0 pb-16 lg:pb-24">
         {/* WebGL Fluid Cursor Trail */}
         <FluidCursor />
         
@@ -251,13 +278,26 @@ export default function App() {
             </div>
             
             {/* Right: Text */}
-            <div className="flex flex-col gap-6 md:gap-8 text-[#F7E9E8]">
-              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.2] font-medium tracking-tight">
-                I explore how to shape timeless brand identities with strategic craft and taste, building the visual foundations for tomorrow's leading businesses.
-              </p>
-              <p className="text-lg sm:text-xl md:text-2xl text-[#F7E9E8]/60 leading-relaxed font-light">
-                I focus on <span className="underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">Brand Strategy</span>, and previously crafted visual systems for <span className="underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">innovative startups</span>, <span className="underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">creative agencies</span>, and ambitious founders.<span className="inline-block w-2.5 h-2.5 bg-[#AD1D12] ml-1 mb-0.5"></span>
-              </p>
+            <div className="relative w-full">
+              {/* Background Text (Faded) */}
+              <div className="flex flex-col gap-6 md:gap-8 text-[#F7E9E8]/30">
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.2] font-medium tracking-tight">
+                  I explore how to shape timeless brand identities with <span className="bg-[#AD1D12] text-white px-2 py-0.5 rounded-sm opacity-100">strategic</span> craft and taste, building the visual foundations for tomorrow's leading businesses.
+                </p>
+                <p className="text-lg sm:text-xl md:text-2xl leading-relaxed font-light">
+                  I focus on <span className="underline decoration-white/20 underline-offset-4 cursor-pointer">Brand Strategy</span>, and previously crafted visual systems for <span className="underline decoration-white/20 underline-offset-4 cursor-pointer">innovative startups</span>, <span className="underline decoration-white/20 underline-offset-4 cursor-pointer">creative agencies</span>, and ambitious founders.<span className="inline-block w-2.5 h-2.5 bg-[#AD1D12]/30 ml-1 mb-0.5"></span>
+                </p>
+              </div>
+
+              {/* Foreground Text (Revealed on Scroll) */}
+              <div ref={aboutTextRef} className="absolute inset-0 flex flex-col gap-6 md:gap-8 text-[#F7E9E8]" style={{ clipPath: 'inset(0 0 100% 0)' }}>
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.2] font-medium tracking-tight">
+                  I explore how to shape timeless brand identities with <span className="bg-[#AD1D12] text-white px-2 py-0.5 rounded-sm">strategic</span> craft and taste, building the visual foundations for tomorrow's leading businesses.
+                </p>
+                <p className="text-lg sm:text-xl md:text-2xl leading-relaxed font-light text-[#F7E9E8]/90">
+                  I focus on <span className="underline decoration-white/50 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">Brand Strategy</span>, and previously crafted visual systems for <span className="underline decoration-white/50 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">innovative startups</span>, <span className="underline decoration-white/50 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">creative agencies</span>, and ambitious founders.<span className="inline-block w-2.5 h-2.5 bg-[#AD1D12] ml-1 mb-0.5"></span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
