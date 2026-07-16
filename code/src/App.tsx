@@ -40,6 +40,9 @@ export default function App() {
           trigger: aboutSectionRef.current,
           start: "top top",
           end: "+=150%", // Keep pinned for 1.5x viewport height
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
           scrub: 1,
           refreshPriority: 1, // Force this pin to be calculated before downstream triggers
           onUpdate: (self) => {
