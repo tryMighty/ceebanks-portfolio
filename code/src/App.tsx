@@ -53,6 +53,7 @@ export default function App() {
           end: "+=150%", // Keep pinned for 1.5x viewport height
           pin: true,
           scrub: 1,
+          anticipatePin: 1, // Fix snap: Pre-calculate the pin earlier to avoid layout jump
           refreshPriority: 1, // Force this pin to be calculated before downstream triggers
           onUpdate: (self) => {
             const clipValue = Math.max(0, 100 - self.progress * 100);
@@ -282,7 +283,7 @@ export default function App() {
               {/* Background Text (Faded) */}
               <div className="flex flex-col gap-6 md:gap-8 text-[#F7E9E8]/30">
                 <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.2] font-medium tracking-tight">
-                  I explore how to shape timeless brand identities with <span className="bg-[#AD1D12] text-white px-2 py-0.5 rounded-sm opacity-100">strategic</span> craft and taste, building the visual foundations for tomorrow's leading businesses.
+                  I explore how to shape timeless brand identities with strategic craft and taste, building the visual foundations for tomorrow's leading businesses.
                 </p>
                 <p className="text-lg sm:text-xl md:text-2xl leading-relaxed font-light">
                   I focus on <span className="underline decoration-white/20 underline-offset-4 cursor-pointer">Brand Strategy</span>, and previously crafted visual systems for <span className="underline decoration-white/20 underline-offset-4 cursor-pointer">innovative startups</span>, <span className="underline decoration-white/20 underline-offset-4 cursor-pointer">creative agencies</span>, and ambitious founders.<span className="inline-block w-2.5 h-2.5 bg-[#AD1D12]/30 ml-1 mb-0.5"></span>
@@ -292,7 +293,7 @@ export default function App() {
               {/* Foreground Text (Revealed on Scroll) */}
               <div ref={aboutTextRef} className="absolute inset-0 flex flex-col gap-6 md:gap-8 text-[#F7E9E8]" style={{ clipPath: 'inset(0 0 100% 0)' }}>
                 <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.2] font-medium tracking-tight">
-                  I explore how to shape timeless brand identities with <span className="bg-[#AD1D12] text-white px-2 py-0.5 rounded-sm">strategic</span> craft and taste, building the visual foundations for tomorrow's leading businesses.
+                  I explore how to shape timeless brand identities with <span className="bg-[#AD1D12] text-[#F7E9E8]">strategic</span> craft and taste, building the visual foundations for tomorrow's leading businesses.
                 </p>
                 <p className="text-lg sm:text-xl md:text-2xl leading-relaxed font-light text-[#F7E9E8]/90">
                   I focus on <span className="underline decoration-white/50 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">Brand Strategy</span>, and previously crafted visual systems for <span className="underline decoration-white/50 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">innovative startups</span>, <span className="underline decoration-white/50 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">creative agencies</span>, and ambitious founders.<span className="inline-block w-2.5 h-2.5 bg-[#AD1D12] ml-1 mb-0.5"></span>

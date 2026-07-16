@@ -20,8 +20,8 @@ export const AboutTextScroll: React.FC = () => {
       if (text1Ref.current) {
         ScrollTrigger.create({
           trigger: text1Ref.current,
-          start: "top 50%",
-          end: "bottom 50%",
+          start: "top 80%",
+          end: "bottom 20%",
           scrub: 1,
           onUpdate: (self) => {
             const clipValue = Math.max(0, 100 - self.progress * 100);
@@ -32,13 +32,21 @@ export const AboutTextScroll: React.FC = () => {
 
       // Services slide-in
       if (servicesRef.current) {
+        const headers = servicesRef.current.querySelectorAll(".services-header");
+        
+        // Fix snap: Set initial positions before the ScrollTrigger takes over
+        if (headers.length >= 3) {
+          gsap.set(headers[0], { x: "100%" });
+          gsap.set(headers[1], { x: "-100%" });
+          gsap.set(headers[2], { x: "100%" });
+        }
+
         ScrollTrigger.create({
           trigger: servicesRef.current,
           start: "top bottom",
           end: "top top",
           scrub: 1,
           onUpdate: (self) => {
-            const headers = servicesRef.current?.querySelectorAll(".services-header");
             if (!headers || headers.length < 3) return;
             gsap.set(headers[0], { x: `${100 - self.progress * 100}%` });
             gsap.set(headers[1], { x: `${-100 + self.progress * 100}%` });
@@ -80,8 +88,8 @@ export const AboutTextScroll: React.FC = () => {
       if (text2Ref.current) {
         ScrollTrigger.create({
           trigger: text2Ref.current,
-          start: "top 50%",
-          end: "bottom 50%",
+          start: "top 80%",
+          end: "bottom 20%",
           scrub: 1,
           onUpdate: (self) => {
             const clipValue = Math.max(0, 100 - self.progress * 100);
