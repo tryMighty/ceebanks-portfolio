@@ -35,25 +35,12 @@ export default function App() {
 
   /* Lenis smooth scroll */
   useEffect(() => {
-    const lenis = new Lenis({ 
-      duration: 1.2, 
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-    
+    const lenis = new Lenis({ duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    function raf(time: number) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
     lenis.on('scroll', ScrollTrigger.update);
-    
-    const update = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-    
-    gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
-    
-    return () => {
-      gsap.ticker.remove(update);
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, []);
 
   /* About Section Scroll Pin & Text Reveal */
@@ -65,7 +52,6 @@ export default function App() {
           start: "top top",
           end: "+=150%", // Keep pinned for 1.5x viewport height
           pin: true,
-          pinType: "transform",
           scrub: 1,
           anticipatePin: 1, // Fix snap: Pre-calculate the pin earlier to avoid layout jump
           refreshPriority: 1, // Force this pin to be calculated before downstream triggers
@@ -74,6 +60,9 @@ export default function App() {
             aboutTextRef.current?.style.setProperty('clip-path', `inset(0 0 ${clipValue}% 0)`);
           }
         });
+        
+        // Force an immediate refresh after creation to ensure downstream triggers recalculate their positions
+        ScrollTrigger.refresh();
       }
     });
     return () => ctx.revert();

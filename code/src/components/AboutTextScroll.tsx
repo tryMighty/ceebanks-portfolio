@@ -60,8 +60,6 @@ export const AboutTextScroll: React.FC = () => {
           start: "top top",
           end: `+=${window.innerHeight * 2}`,
           pin: true,
-          pinType: "transform",
-          anticipatePin: 1,
           scrub: 1,
           pinSpacing: false,
           onUpdate: (self) => {
