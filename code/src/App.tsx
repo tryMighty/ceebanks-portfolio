@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 import ceebanksImg from '../ceebanks.png';
 
 import { AsciiFooter } from './components/AsciiFooter';
@@ -33,16 +32,6 @@ export default function App() {
     // Nav hiding logic removed since nav is no longer fixed
   }, []);
 
-  /* Lenis smooth scroll */
-  useEffect(() => {
-    const lenis = new Lenis({ duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-    function raf(time: number) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.lagSmoothing(0);
-    return () => lenis.destroy();
-  }, []);
-
   /* About Section Scroll Pin & Text Reveal */
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -51,9 +40,7 @@ export default function App() {
           trigger: aboutSectionRef.current,
           start: "top top",
           end: "+=150%", // Keep pinned for 1.5x viewport height
-          pin: true,
           scrub: 1,
-          anticipatePin: 1, // Fix snap: Pre-calculate the pin earlier to avoid layout jump
           refreshPriority: 1, // Force this pin to be calculated before downstream triggers
           onUpdate: (self) => {
             const clipValue = Math.max(0, 100 - self.progress * 100);
@@ -135,7 +122,7 @@ export default function App() {
   return (
     <div className="min-h-screen text-[#F7E9E8] antialiased relative selection:bg-[#AD1D12] selection:text-[#F7E9E8] overflow-x-hidden bg-transparent">
       
-      <main className="relative z-10 bg-[#282828] overflow-hidden rounded-b-[30px] lg:rounded-b-[40px] shadow-[0_30px_60px_rgba(0,0,0,0.5)] border-b border-black/20">
+      <main className="relative z-10 bg-[#282828] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.5)] border-b border-black/20">
       {/* ── Navbar ───────────────────────────────────────────────────────── */}
       <div ref={navRef} className="absolute top-0 left-1/2 -translate-x-1/2 z-50 max-w-7xl w-full px-4 sm:px-6">
         <header className="w-full py-2 flex items-center justify-between text-[#282828] transition-all duration-300">
@@ -184,7 +171,7 @@ export default function App() {
       )}
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-[85svh] lg:h-[100svh] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] rounded-b-[30px] lg:rounded-b-[40px] z-20 select-none touch-manipulation">
+      <section id="home" onDoubleClick={handleDoubleClick} className="relative w-full h-[85svh] lg:h-[100svh] flex flex-col items-center justify-end overflow-hidden bg-[#F7E9E8] z-20 select-none touch-manipulation">
 
         {/* WebGL Fluid Cursor Trail */}
         <FluidCursor />
