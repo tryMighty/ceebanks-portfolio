@@ -220,12 +220,48 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── Inverted CeeBanks Text ─────────────────────────────────────────── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center px-4 mt-0 mb-16 sm:mb-24 lg:mb-32 pointer-events-none">
-        <h2 className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk text-[#F7E9E8]">
-          CeeBanks<span className="text-[#AD1D12]">.</span>
-        </h2>
-      </div>
+      {/* ── About Section ────────────────────────────────────────────────── */}
+      <section id="about" className="relative w-full overflow-hidden bg-[#282828] pt-0 pb-16 lg:pb-24">
+        {/* WebGL Fluid Cursor Trail */}
+        <FluidCursor />
+        
+        {/* Grid lines background */}
+        <div className="absolute inset-0 pointer-events-none border border-white/5 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_70%,transparent_100%)] z-0"></div>
+
+        {/* ── Inverted CeeBanks Text ─────────────────────────────────────────── */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center px-4 mt-0 mb-12 sm:mb-16 lg:mb-24 pointer-events-none">
+          <h2 className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk text-[#F7E9E8]">
+            CeeBanks<span className="text-[#AD1D12]">.</span>
+          </h2>
+        </div>
+
+        {/* ── Intro / Nuggets 3 ────────────────────────────────────────────── */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mb-24 lg:mb-32">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-12 md:gap-16 items-center">
+            
+            {/* Left: Profile Image */}
+            <div className="relative max-w-[240px] md:max-w-[280px] mx-auto md:mx-0 w-full">
+              <div className="aspect-square w-full overflow-hidden rounded-sm bg-[#1a1a1a]">
+                <img src={ceebanksImg} alt="CeeBanks Profile" className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700 ease-out" />
+              </div>
+              {/* Signature overlay */}
+              <div className="absolute -top-5 -left-4 md:-left-8 text-[#AD1D12] font-serif italic text-4xl sm:text-5xl -rotate-12 drop-shadow-lg z-20 pointer-events-none tracking-tight">
+                CeeBanks
+              </div>
+            </div>
+            
+            {/* Right: Text */}
+            <div className="flex flex-col gap-6 md:gap-8 text-[#F7E9E8]">
+              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.2] font-medium tracking-tight">
+                I explore how to shape timeless brand identities with strategic craft and taste, building the visual foundations for tomorrow's leading businesses.
+              </p>
+              <p className="text-lg sm:text-xl md:text-2xl text-[#F7E9E8]/60 leading-relaxed font-light">
+                I focus on <span className="underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">Brand Strategy</span>, and previously crafted visual systems for <span className="underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">innovative startups</span>, <span className="underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white transition-colors cursor-pointer">creative agencies</span>, and ambitious founders.<span className="inline-block w-2.5 h-2.5 bg-[#AD1D12] ml-1 mb-0.5"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── About Text Scroll ─────────────────────────────────────────── */}
       <AboutTextScroll />
