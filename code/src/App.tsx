@@ -236,7 +236,7 @@ export default function App() {
       </section>
 
       {/* ── About Section ────────────────────────────────────────────────── */}
-      <section ref={aboutSectionRef} id="about" className="relative w-full overflow-hidden bg-[#282828] pt-0 pb-16 lg:pb-24">
+      <section ref={aboutSectionRef} id="about" className="relative w-full overflow-hidden bg-[#282828] pt-0 pb-16 lg:pb-24 invertible">
         {/* WebGL Fluid Cursor Trail */}
         <FluidCursor />
         
@@ -245,7 +245,7 @@ export default function App() {
 
         {/* ── Inverted CeeBanks Text ─────────────────────────────────────────── */}
         <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center px-4 mt-0 mb-12 sm:mb-16 lg:mb-24 pointer-events-none">
-          <h2 className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk text-[#F7E9E8]">
+          <h2 className="text-[19vw] sm:text-[17vw] lg:text-[15.5vw] leading-[0.75] font-extrabold tracking-tighter text-center w-full font-grotesk text-[#F7E9E8] invertible pointer-events-auto">
             CeeBanks<span className="text-[#AD1D12]">.</span>
           </h2>
         </div>
